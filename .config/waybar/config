@@ -1,0 +1,119 @@
+{
+    "spacing": 0,
+    "modules-left": ["sway/workspaces", "sway/scratchpad", "mpd"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["tray", "pulseaudio", "temperature", "backlight", "sway/language", "battery", "network", "clock", "custom/power"],
+    "custom/void-linux": {
+        "format": ""
+	},
+	"sway/window": {
+	"max-length":40,
+	},
+    "sway/language": {
+    	"format": "{shortDescription} 󰌌"
+    },
+    "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+                "format-disconnected": "Disconnected ",
+                "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+                "interval": 2,
+                "consume-icons": {
+                     "on": " " // Icon shows only when "consume" is on
+                },
+                "random-icons": {
+                     "off": "<span color='#666666'></span> ", // Icon grayed out when "random" is off
+                     "on": " "
+                },
+                "repeat-icons": {
+                     "off": "<span color='#666666'> </span> ", // Icon grayed out when "random" is off
+                     "on": "  "
+                },
+                "single-icons": {
+                     "on": "1 "
+                },
+                "state-icons": {
+                     "paused": " ",
+                     "playing": " "
+                },
+                "tooltip-format": "MPD (connected)",
+                "tooltip-format-disconnected": "MPD (disconnected)",
+    "artist-len": 20,
+    "title-len": 20
+    },
+        "network": {
+        "format": "{icon}",
+	"format-wifi":	"{icon} {essid}",
+        "format-alt": "{ipaddr}/{cidr} {icon}",                                                                                              
+        "format-alt-click": "click-right",                                                                                                   
+        "format-icons": {                                                                                                                    
+            "wifi": ["睊", "直" ,""],                                                                                                       
+            "ethernet": [""],                                                                                                               
+            "disconnected": [""]                                                                                                            
+        },                                                                                                                                   
+	},
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "tray": {
+        "reverse-direction": true,
+        "spacing": 20
+    },
+    "clock": {
+        "tooltip-format": "{:%A %B %d %Y | %H:%M}",
+        //"format": "  {:%a %d %b  %I:%M %p}",	//12 hour format
+        "format": " {:%a %d %b  %H:%M}",	//24 hour format
+        "format-alt": "  {:%d/%m/%Y  %H:%M:%S}",
+        //"timezones": [ "Kolkata" ],
+        //"max-length": 200
+        "interval": 1
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": [""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "amixer set Capture toggle"
+    },
+    "custom/power": {
+        "format": "",
+	"on-click": "nwgbar"
+	}
+}
+

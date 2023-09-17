@@ -1,0 +1,33 @@
+directory: ~/mus
+plugins: spotify fromfilename fetchart lyrics fish edit embedart smartplaylist mpdupdate play
+smartplaylist:
+  relative_to: ~/mus
+  playlist_dir: ~/mus/playlists
+  playlists:
+    - name: all.m3u
+      query: ''
+    - name: Favorites.m3u
+      query: 'fav:1'
+mpd:
+  host: localhost
+  port: 6600
+play:
+  command: /home/napca/.config/beets/play.sh
+
+spotify: 
+  source_weight: 0.0
+lyrics:
+  auto: no
+fetchart:
+  auto: no
+embedart:
+  auto: no
+  remove_art_file: yes
+library: ~/.config/beets/musiclibrary.db
+import:
+  move: yes
+  copy: no
+  write: yes
+  duplicate_action: merge
+  group_albums: yes
+

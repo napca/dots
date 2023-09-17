@@ -1,0 +1,486 @@
+* {
+    border: none;
+    border-radius: 14px;
+    /* `otf-font-awesome` is required to be installed for icons */
+    min-height: 0px;
+}
+window {margin: 1px;}
+window#waybar {
+    background-color: transparent;
+    color: #f7768e;
+    transition-property: background-color;
+    transition-duration: .5s;
+    #margin-left: 5px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: #1a1b26;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+#null {#margin-left: 5px;}
+#workspaces  {
+    color: #f7768e;
+    /* Use box-shadow instead of border so the text isn't offset */
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    border: none;
+    #margin-left: 0px;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    border-radius: 0px;
+}
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+  color: #1a1b26;
+}
+#workspaces button.current_output {
+  color: #c0caf5;
+}
+#workspaces button.focused {
+color: #e67e80;
+}
+
+#workspaces button.urgent {
+color: #e0af68;
+}
+
+#mode {
+  color: #c0caf5;
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    #margin: 2px 5px ;
+    padding: 2px 5px ;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+}
+
+/*#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,*/
+
+#window{
+    background: transparent;
+    font-size: 14px;
+    color: #c0caf5;
+    padding: 2px ;
+    border-radius: 0px;
+    #margin: 3px;
+    background-color: transparent;
+    border-radius: 15px;
+}
+.modules-right{
+  background: transparent;
+  padding: 2px;
+  padding-top: 0px;
+  #margin: 3px;
+  border-radius: 25px;
+}
+.modules-center{
+  background: transparent;
+  padding: 0px;
+  #margin: 3px;
+  border-radius: 20px;
+}
+.modules-left{
+  background: transparent;
+  padding: 2px;
+  #margin: 3px;
+  padding-top: 0px;
+  border-radius: 25px;
+}
+
+/* If workspaces is the leftmost module, omit left #margin */
+/*.modules-left > widget:first-child > #workspaces {
+}
+*/
+
+/* If workspaces is the rightmost module, omit right #margin */
+/*
+.modules-right > widget:last-child > #workspaces {
+}
+*/
+
+#clock {
+    font-family: "Material Design Icons";
+    color: #7dcfff;
+    border-top-right-radius: 0px;
+    font-size: 14px;
+    #margin: 2px 0px ;
+    padding: 2px 5px ;
+    #margin-right: 5px;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    #margin-right : 5px;
+}
+
+#battery {
+    #margin: 2px 0px;
+    border-radius: 0px;
+    color: #83c092;
+    border-left: none;
+    border-right: none;
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    padding: 2px 5px ;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#battery.charging {
+    color: #d8dee9;
+}
+
+@keyframes blink {
+    to {
+        background-color: #d8dee9;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #d8dee9;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+    font-size: 12px;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+}
+
+#cpu {
+    #margin: 2px 0px;
+    font-family: "Material Design Icons";
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    color: #9ece6a;
+    font-size: 14px;
+    padding-bottom: 2px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#memory {
+    #margin: 2px 0px;
+    border-radius: 0px;
+    border-left: none;
+    border-right: none;
+    color: #e0af68;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#backlight {
+    background-color: #90b1b1;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+}
+
+#network {
+    #margin: 2px 0px;
+    border-radius: 0px;
+    color: #c0caf5;
+    border-left: none;
+    border-right: none;
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    padding: 2px 5px ;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#pulseaudio {
+    #margin: 2px 0px;
+    border-radius: 0px;
+    color: #83c092;
+    border-left: none;
+    border-right: none;
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    padding: 2px 5px ;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#pulseaudio.muted {
+    background-color: #1a1b26;
+    color: #d8dee9;
+    #margin: 2px 2px ;
+    padding: 2px 5px ;
+}
+
+#custom-waybar-mpris {
+    color: #9ece6a;
+    font-size: 12px;
+    #margin: 2px 0px;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    min-width: 16px;
+    font-size: 14px;
+    border-left: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    padding-right: 10px;
+    border-top-left-radius: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+#custom-media {
+    background-color: #1a1b26;
+    color: #d8dee9;
+    min-width: 100px;
+    font-size: 12px;
+    #margin: 2px 2px ;
+    padding: 2px 5px ;
+}
+
+#custom-media.custom-spotify {
+    background-color: #1a1b26;
+    font-size: 12px;
+    #margin: 2px 2px ;
+    padding: 2px 5px ;
+}
+
+#custom-media.custom-vlc {
+    background-color: #1a1b26;
+    font-size: 12px;
+    #margin: 2px 2px ;
+    padding: 2px 5px ;
+}
+
+#temperature {
+    #margin: 2px 0px;
+    border-radius: 0px;
+    border-left: none;
+    border-right: none;
+    font-family: "Material Design Icons";
+    font-size: 14px;
+    padding: 2px 5px ;
+    color: #bb9af7;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#temperature.critical {
+    background-color: #1a1b26;
+    font-size: 14px;
+    #margin: 2px 2px ;
+    padding: 2px 5px ;
+}
+
+#tray {
+    border-top-right-radius: 0px;
+    #margin: 2px 0px ;
+    padding: 2px 5px ;
+    border-right: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+}
+
+#idle_inhibitor {
+    background-color: #1a1b26;
+    font-size: 12px;
+}
+
+#idle_inhibitor.activated {
+    background-color: #1a1b26;
+    color: #2d3436;
+    font-size: 12px;
+}
+
+#mpd {
+    color: #9ece6a;
+    font-size: 12px;
+    #margin: 2px 0px;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    min-width: 16px;
+    font-size: 14px;
+    border-left: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    padding-right: 10px;
+    border-top-left-radius: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#custom-prev {
+
+    color: #c0caf5;
+    font-size: 12px;
+    #margin: 2px 0px;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    min-width: 16px;
+    font-size: 14px;
+    border-left: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    border-top-left-radius: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+#custom-playpause {
+    color: #c0caf5;
+    font-size: 12px;
+    #margin: 2px 0px;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    min-width: 16px;
+    font-size: 14px;
+    border-left: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    border-top-left-radius: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+#custom-next {
+    color: #c0caf5;
+    font-size: 12px;
+    #margin: 2px 0px;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    min-width: 16px;
+    font-size: 14px;
+    border-left: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin-bottom: 0px;
+    border-top-left-radius: 0px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+}
+
+#language {
+    color: #e67e80;
+    #margin: 2px 0px;
+    border-radius: 0px;
+    padding: 2px 5px ;
+    font-family: "Material Design Icons";
+    min-width: 16px;
+    font-size: 14px;
+    border-left: none;
+    border-right: none;
+    #margin-top: 5px;
+    padding-bottom: 2px;
+    #margin: 2px;
+    #margin-top: 5px;
+    #margin-left: 1px;
+    background-color: #1a1b26;
+    border-radius: 4px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}

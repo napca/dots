@@ -1,0 +1,21 @@
+unmap n
+unmap e
+unmap o
+unmap i
+unmap N
+unmap E
+unmap O
+unmap I
+map n scroll left
+map e scroll down
+map o scroll up
+map i scroll right
+map N zoom out
+map E navigate next
+map O navigate previous
+map I zoom in
+map u recolor
+map p :open
+set scroll-full-overlap 0.1
+set statusbar-page-percent true
+set statusbar-home-tilde true

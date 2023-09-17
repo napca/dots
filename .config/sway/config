@@ -1,0 +1,283 @@
+#set input configs
+    input "type:touchpad" {
+    tap enabled
+    pointer_accel 0.6
+    dwtp enabled
+    dwt enabled
+    accel_profile adaptive
+    }
+    input "1133:16468:Logitech_Wireless_Mouse" {
+    	accel_profile "flat"
+	pointer_accel 0
+	}
+    input "type:keyboard" {
+      xkb_layout workman,ir,ru
+      xkb_options grp:alt_space_toggle,caps:backspace,compose:ralt
+    }
+    input 2:10:TPPS/2_Elan_TrackPoint {
+        accel_profile flat
+        dwt enabled
+        pointer_accel 0.3
+        scroll_factor 0.65
+    }
+# Variables
+seat seat0 xcursor_theme 'Vimix Cursors - White' 24
+bindgesture swipe:4:up exec "echo 2 > /tmp/sovpipe"
+bindgesture swipe:4:left workspace prev
+bindgesture swipe:4:right workspace next
+bindgesture swipe:4:down exec pkill wofi || wofi -G -w 4 -S drun -W 80\% -H 40\% -I
+bindswitch lid:off exec swaylock -c 000000 & systemctl suspend
+exec_always rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -c 3 -n
+include /etc/sway/config.d/*
+    set {
+        $mod Mod4
+        $alt Mod1
+# set custom icons for workspaces
+        $ws1 		"1"
+        $ws2 		"2"
+        $ws3 		"3"
+        $ws4 		"4"
+        $ws5 		"5"
+        $ws6 		"6"
+#Set variables for color scheme
+        $red		#f7768e
+        $green		#9ece6a
+        $yellow		#e0af68
+        $blue		#7aa2f7
+        $white		#c0caf5
+        $bg		#1a1b26
+        $bglighter	#414868
+        $bglight	#15161e
+# Home row direction keys
+        $left j
+        $down k
+        $up l
+        $right semicolon
+# Your preferred terminal emulator
+#        $term footclient -e tmux
+	 $term gnome-terminal -- tmux
+    }
+#    workspace_auto_back_and_forth yes
+    floating_modifier $mod normal
+#    output * bg ~/pic/heavenSentSkull.png fill
+    output * bg ~/.config/sway/wall.jpg fill
+    #output DP-1 bg ~/.config/sway/wall-right.jpg fill
+bindsym --to-code {
+        # Toggle control center
+#        $mod+Shift+n exec swaync-client -t -sw
+        $mod+shift+x exec swaymsg "output * dpms off"
+        $mod+x exec swaymsg "output * dpms on"
+        $mod+Return exec $term #run Terminal
+	$mod+Escape exec swaylock -c 000000
+	$mod+z exec swaylock -c 000000
+	$mod+shift+z exec swaylock -c 000000 & systemctl suspend
+	$mod+shift+Control+z exec swaylock -c 000000 & systemctl hibernate
+        $mod+q kill
+#        $mod+r exec j4-dmenu-desktop --dmenu="bemenu -i --nb '#2b3339' --hb '#2b3339' --sb '#4b565c' --fbb '#2b3339' --scb '#2b3339' --tb '#2b3339' --fb '#2b3339' --ab '#2b3339' --nb '#2b3339' --hf '#dbbc7f' --tf '#e67e80' -H 32" #run app launcher
+        $mod+r exec pkill wofi || wofi -G -w 4 -S drun -W 80\% -H 40\% -I
+        $mod+m exec "music"
+        #$mod+r exec ulauncher
+        $mod+Shift+c reload
+    #change focus
+        $mod+$left focus left
+        $mod+$down focus down
+        $mod+$up focus up
+        $mod+$right focus right
+        $mod+Left focus left
+        $mod+Down focus down
+        $mod+Up focus up
+        $mod+Right focus right
+    #change focus with alt-tab
+        $alt+tab focus next
+        $alt+shift+tab focus prev
+    #move windows around
+        $mod+Shift+$left move left
+        $mod+Shift+$down move down
+        $mod+Shift+$up move up
+        $mod+Shift+$right move right
+        $mod+Shift+Left move left
+        $mod+Shift+Down move down
+        $mod+Shift+Up move up
+        $mod+Shift+Right move right
+    #switch workspaces
+    
+    $mod+tab exec "echo 2 > /tmp/sovpipe"
+    $mod exec "echo 1 > /tmp/sovpipe"
+    --release $mod exec "echo 0 > /tmp/sovpipe"
+        $mod+1 workspace $ws1
+        $mod+2 workspace $ws2
+        $mod+3 workspace $ws3
+        $mod+4 workspace $ws4
+        $mod+5 workspace $ws5
+        $mod+6 workspace $ws6
+    #move window to another workspace
+        $mod+Shift+1 move container to workspace $ws1
+        $mod+Shift+2 move container to workspace $ws2
+        $mod+Shift+3 move container to workspace $ws3
+        $mod+Shift+4 move container to workspace $ws4
+        $mod+Shift+5 move container to workspace $ws5
+        $mod+Shift+6 move container to workspace $ws6
+    #shortcuts for multi-monitor management
+        $mod+n exec swaync-client -t -sw
+#        $mod+shift+n move output left
+        $mod+shift+tab move output left
+        $mod+Control+tab move workspace to output left
+        $mod+Control+n move workspace to output left
+    #switch between sway's layouts
+        $mod+i splitv
+        $mod+o splith
+        $mod+u layout tabbed
+        $mod+p layout toggle split
+        $mod+f fullscreen
+        $mod+shift+f fullscreen global
+        $mod+Shift+space floating toggle
+        $mod+space focus mode_toggle
+        $mod+a focus parent
+        $mod+Shift+0 move scratchpad
+        $mod+Shift+v move scratchpad
+        #basically a window that you can hide and show on your focused workspace
+        $mod+0 scratchpad show
+        $mod+v scratchpad show
+        #show scratchpad
+    #playerctl is for managing your media player
+    #dbus-send commands are shortcuts only for spotify
+        --release $mod+shift+bracketright exec playerctl next
+        --release $mod+caps_lock exec mpc toggle
+        --release $mod+shift+caps_lock exec playerctl play-pause
+        --release $mod+bracketleft exec mpc prev
+        --release $mod+shift+bracketleft exec playerctl previous
+        --release $mod+shift+apostrophe exec playerctl play-pause
+        --release $mod+apostrophe exec mpc toggle
+        --release $mod+bracketright exec mpc next
+        $mod+equal exec mpc volume +2
+        $mod+minus exec mpc volume -2
+
+        #enter shortcut mode
+        $mod+e mode Shortcuts
+        XF86PowerOff exec ./.config/rofi/powermenu/powermenu.sh #you have to disable your init's power button management
+        $mod+Control+q exec ./.config/rofi/powermenu/powermenu.sh
+    #resizing your window
+        $mod+Control+$left resize shrink width 10 px or 10 ppt
+        $mod+Control+$down resize grow height 10 px or 10 ppt
+        $mod+Control+$up resize shrink height 10 px or 10 ppt
+        $mod+Control+$right resize grow width 10 px or 10 ppt
+        $mod+Control+left resize shrink width 10 px or 10 ppt
+        $mod+Control+down resize grow height 10 px or 10 ppt
+        $mod+Control+up resize shrink height 10 px or 10 ppt
+        $mod+Control+right resize grow width 10 px or 10 ppt
+    #playerctl for function buttons
+        $mod+shift+equal exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% #increase sound volume
+        $mod+shift+minus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% #decrease sound volume
+    #screenshot
+        $mod+Print exec grimshot copy output
+        $mod+shift+Print exec grimshot copy area
+        $mod+Control+Print exec grimshot copy
+        #$mod+b exec QT_QPA_PLATFORM=wayland brave --enable-gpu --ignore-gpu-blocklist --enable-gpu-rasterization --password-store=basic --enable-zero-copy --enable-native-gpu-memory-buffers --disable-experimental-web-platform-features --enable-unsafe-webgpu --use-cmd-decoder=passthrough --enable-gpu-compositing
+        $mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
+    }
+    include /etc/sway/config.d/*
+    #popup_during_fullscreen smart
+    mode "Shortcuts" {
+    # a custom mode for running apps
+        bindsym --to-code {
+            d exec XDG_CURRENT_DESKTOP=gnome QT_QPA_PLATFORM=wayland Discord
+            s exec spotify
+            e exec nemo
+            v exec vlc
+            b exec QT_QPA_PLATFORM=wayland brave
+           # t exec XDG_CURRENT_DESKTOP=GNOME telegram-desktop & sleep 600;killall telegram-desktop
+            t exec ~/.config/sway/tg.sh
+            Return mode "default"
+            $mod+e mode "default"
+            Escape mode "default"
+            }
+    }
+
+    gaps inner  1 
+    gaps outer  1 
+    default_border pixel 1 #border width
+#removes border if you have only one window
+    smart_borders on
+    #	<colorclass>		    <border>	<background>    <text>	<indicator>	<child_border>
+    	client.focused 		    $bg     	$bg     	    $red   	$blue		$red
+    	client.focused_inactive	$bg		    $bg		        $white	$bg		    $bg
+        client.unfocused  	    $bg 		$bg	            $white	$red		$bg
+    	client.urgent		    $yellow		$yellow		    $bg	    $yellow		$yellow
+#assign windows to open in said workspace
+    for_window {
+#        [title="Picture-in-Picture"] border none
+        [   class="opera"\
+            class="chromium"\
+            class="firefox"\
+            class="Brave-browser"]\
+        move to workspace $ws2
+        [   class="ferdiDesktop"\
+            class="ferdi"\
+            class="Ferdi"\
+            class="ferdi"\
+            class="KotatogramDesktop"\
+            app_id="telegramdesktop"\
+            class="discord"\
+         ] move to workspace $ws3
+        [class="Gimp-2.10"] move to workspace $ws5
+    }
+      for_window  [class="Spotify"] move to workspace $ws4
+      for_window [app_id="ulauncher"] border none
+      for_window [app_id="telegramdesktop"] move to workspace $ws3
+      for_window  [title="rsmixer"] floating enable
+      for_window [title="Choose Files"] floating enable
+#some configuration for my laptop
+    set $laptop LVDS-1
+    bindswitch --reload --locked lid:on output $laptop disable
+    bindswitch --reload --locked lid:off output $laptop enable
+#monitor layout
+    output HDMI-A-1 pos 0 0 mode 1920x1080@75.000Hz
+    output DP-1 pos 1920 0 mode 1920x1080@74.973Hz transform 90 
+    set $gnome-schema org.gnome.desktop.interface
+
+    exec --no-startup-id {
+    #PipeWire is a newer technology for audio,has great potential,but apps are still buggy with it
+        pipewire
+        pipewire-pulse
+        wireplumber
+        /lib/xdg-desktop-portal -r
+        /lib/xdg-desktop-portal-wlr
+        foot --server
+#        keepassxc
+    #audio
+        #pulseaudio
+        # Notification Daemon
+        swaync
+#        mako
+   #     swayidle -w timeout 600 'sudo zzz'
+    }
+    exec {
+        #export $(dbus-launch)
+        #dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+        mpd
+	waybar
+        #corectrl ##### use a shell script like a chad
+        #sudo oc.sh
+        #Discord
+#        MOZ_ENABLE_WAYLAND=1 firefox
+#        mpc load all
+#        mpc shuffle
+        mpd-mpris
+        mpdscribble
+        gsettings set $gnome-schema gtk-theme 'adw-gtk3-dark'
+        gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+        gsettings set $gnome-schema cursor-theme 'Vimix Cursors - White'
+        gsettings set $gnome-schema font-name 'JetBrains Nerd Font Mono 11'
+        import-gsettings
+        /lib/kdeconnectd
+}
+    exec_always {
+    #These always run when you reload sway
+#        killall fetchcord;fetchcord --noshell --nohost -t 15 -p
+        gsettings set $gnome-schema gtk-theme adw-gtk3-dark
+        pkill waybar;waybar
+	/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+        #go run ~/Projects/go/main.go
+#        redwal
+                }
+    seat seat0 xcursor_theme "Vimix-white-cursors"

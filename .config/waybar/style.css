@@ -1,0 +1,87 @@
+* {
+    font-family: Fira Sans Book;
+    font-size: 12px;
+    font-weight: 500;
+    color: #cdd6f4;
+}
+
+window#waybar {
+    background-color: rgba(30, 30, 46, 0.5);
+}
+
+#workspaces button {
+    padding: 0px 0px;
+    color: #cdd6f4;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: transparent;
+    border-bottom: 1px solid #a6e3a1;
+    border-radius: 2px;
+}
+
+#workspaces button.urgent {
+    background-color: rgba(243, 139, 168, 0.2);
+}
+
+#custom-power,
+#battery,
+#memory,
+#temperature,
+#backlight,
+#network,
+#language,
+#pulseaudio,
+#tray {
+    padding: 0px 5px;
+    background-color: transparent;
+}
+
+#pulseaudio {
+    color: #fab387;
+}
+
+#custom-power {
+    color: #f38ba8;
+}
+
+#battery {
+    color: #a6e3a1;
+}
+
+#custom-void-linux {
+    padding: 0 0px;
+    color: #a6e3a1;
+}
+
+#temperature {
+    color: #eba0ac;
+}
+
+#backlight {
+    color: #f9e2af;
+}
+
+#clock {
+    color: #b4befe;
+}
+
+#language {
+    color: #cba6f7;
+}
+
+#workspaces {
+    margin: 0 0px;
+}
+
+#scratchpad{
+    background: rgba(69, 71, 90, 0);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
