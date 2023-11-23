@@ -1,6 +1,7 @@
-#set input configs
+#set thastsanput configs
     input "type:touchpad" {
     tap enabled
+    events disabled
     pointer_accel 0.6
     dwtp enabled
     dwt enabled
@@ -14,11 +15,11 @@
       xkb_layout workman,ir,ru
       xkb_options grp:alt_space_toggle,caps:backspace,compose:ralt
     }
-    input 2:10:TPPS/2_Elan_TrackPoint {
-        accel_profile flat
+    input "2:10:TPPS/2_Elan_TrackPoint" {
+        accel_profile adaptive
         dwt enabled
-        pointer_accel 0.3
-        scroll_factor 0.65
+        pointer_accel -0.37
+        scroll_factor 0.67
     }
 # Variables
 seat seat0 xcursor_theme 'Vimix Cursors - White' 24
@@ -26,8 +27,9 @@ bindgesture swipe:4:up exec "echo 2 > /tmp/sovpipe"
 bindgesture swipe:4:left workspace prev
 bindgesture swipe:4:right workspace next
 bindgesture swipe:4:down exec pkill wofi || wofi -G -w 4 -S drun -W 80\% -H 40\% -I
-bindswitch lid:off exec swaylock -c 000000 & systemctl suspend
-exec_always rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -c 3 -n
+bindswitch lid:on exec "~/.config/sway/lock.sh & systemctl suspend"
+bindswitch --locked lid:on exec systemctl suspend
+exec_always killall sov && rm -f /tmp/sovpipe ; mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -c 3 -n
 include /etc/sway/config.d/*
     set {
         $mod Mod4
@@ -54,24 +56,45 @@ include /etc/sway/config.d/*
         $up l
         $right semicolon
 # Your preferred terminal emulator
-#        $term footclient -e tmux
-	 $term gnome-terminal -- tmux
+        $term footclient -e tmux
+#	 $term gnome-terminal -- tmux
     }
 #    workspace_auto_back_and_forth yes
     floating_modifier $mod normal
 #    output * bg ~/pic/heavenSentSkull.png fill
-    output * bg ~/.config/sway/wall.jpg fill
+    output * bg ~/.config/sway/wall.png fill
     #output DP-1 bg ~/.config/sway/wall-right.jpg fill
 bindsym --to-code {
+    # Sink volume optionally with --device
+ --locked XF86AudioRaiseVolume exec swayosd-client --output-volume 2
+# Sink volume -optionally with --device
+ --locked XF86AudioLowerVolume exec  swayosd-client --output-volume -2
+# Sink volume toggle mute
+ --locked XF86AudioMute exec swayosd-client --output-volume mute-toggle
+ --locked $mod+shift+backspace exec swayosd-client --output-volume mute-toggle
+# Source volume toggle mute
+ --locked XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
+ # Brightness raise
+--locked XF86MonBrightnessUp exec swayosd-client --brightness raise
+--locked $mod+Control+equal exec swayosd-client --brightness raise
+# Brightness lower
+--locked XF86MonBrightnessDown exec swayosd-client --brightness lower
+--locked $mod+Control+minus exec swayosd-client --brightness lower
+
         # Toggle control center
 #        $mod+Shift+n exec swaync-client -t -sw
+        $mod+Control+e input type:keyboard xkb_switch_layout 0
+        $mod+Control+f input type:keyboard xkb_switch_layout 1
+        $mod+Control+r input type:keyboard xkb_switch_layout 2
+        --release $alt+Space exec notify-send $(swaymsg -t get_inputs | jq '.[0].xkb_active_layout_name'|tr -d '"') -t 650 -e
         $mod+shift+x exec swaymsg "output * dpms off"
         $mod+x exec swaymsg "output * dpms on"
-        $mod+Return exec $term #run Terminal
-	$mod+Escape exec swaylock -c 000000
-	$mod+z exec swaylock -c 000000
-	$mod+shift+z exec swaylock -c 000000 & systemctl suspend
-	$mod+shift+Control+z exec swaylock -c 000000 & systemctl hibernate
+        $mod+Return [con_mark="term"] scratchpad show
+        $mod+shift+Return exec $term
+	$mod+Escape exec "~/.config/sway/lock.sh"
+	$mod+z exec "~/.config/sway/lock.sh"
+	$mod+shift+z exec "~/.config/sway/lock.sh& systemctl suspend"
+	$mod+shift+Control+z exec "~/.config/sway/lock.sh& systemctl hibernate"
         $mod+q kill
 #        $mod+r exec j4-dmenu-desktop --dmenu="bemenu -i --nb '#2b3339' --hb '#2b3339' --sb '#4b565c' --fbb '#2b3339' --scb '#2b3339' --tb '#2b3339' --fb '#2b3339' --ab '#2b3339' --nb '#2b3339' --hf '#dbbc7f' --tf '#e67e80' -H 32" #run app launcher
         $mod+r exec pkill wofi || wofi -G -w 4 -S drun -W 80\% -H 40\% -I
@@ -141,16 +164,16 @@ bindsym --to-code {
         #show scratchpad
     #playerctl is for managing your media player
     #dbus-send commands are shortcuts only for spotify
-        --release $mod+shift+bracketright exec playerctl next
-        --release $mod+caps_lock exec mpc toggle
+        --release --locked $mod+shift+bracketright exec playerctl next
+        --release --locked $mod+caps_lock exec mpc toggle
         --release $mod+shift+caps_lock exec playerctl play-pause
-        --release $mod+bracketleft exec mpc prev
+        --release --locked $mod+bracketleft exec mpc prev
         --release $mod+shift+bracketleft exec playerctl previous
         --release $mod+shift+apostrophe exec playerctl play-pause
-        --release $mod+apostrophe exec mpc toggle
-        --release $mod+bracketright exec mpc next
-        $mod+equal exec mpc volume +2
-        $mod+minus exec mpc volume -2
+        --release --locked $mod+apostrophe exec mpc toggle
+        --release --locked $mod+bracketright exec mpc next
+        --locked $mod+equal exec mpc volume +2
+        --locked $mod+minus exec mpc volume -2
 
         #enter shortcut mode
         $mod+e mode Shortcuts
@@ -166,8 +189,8 @@ bindsym --to-code {
         $mod+Control+up resize shrink height 10 px or 10 ppt
         $mod+Control+right resize grow width 10 px or 10 ppt
     #playerctl for function buttons
-        $mod+shift+equal exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% #increase sound volume
-        $mod+shift+minus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% #decrease sound volume
+        --locked $mod+shift+equal exec swayosd-client --output-volume 2
+        --locked $mod+shift+minus exec swayosd-client --output-volume -2
     #screenshot
         $mod+Print exec grimshot copy output
         $mod+shift+Print exec grimshot copy area
@@ -193,8 +216,8 @@ bindsym --to-code {
             }
     }
 
-    gaps inner  1 
-    gaps outer  1 
+    gaps inner  5 
+    gaps outer  2 
     default_border pixel 1 #border width
 #removes border if you have only one window
     smart_borders on
@@ -208,7 +231,6 @@ bindsym --to-code {
 #        [title="Picture-in-Picture"] border none
         [   class="opera"\
             class="chromium"\
-            class="firefox"\
             class="Brave-browser"]\
         move to workspace $ws2
         [   class="ferdiDesktop"\
@@ -216,65 +238,52 @@ bindsym --to-code {
             class="Ferdi"\
             class="ferdi"\
             class="KotatogramDesktop"\
-            app_id="telegramdesktop"\
             class="discord"\
          ] move to workspace $ws3
         [class="Gimp-2.10"] move to workspace $ws5
     }
+    for_window [class="TelegramDesktop"] move to workspace $ws3
+    for_window [app_id="firefox"] move to workspace $ws2
+    for_window [app_id="org.telegram.desktop"] move to workspace $ws3
       for_window  [class="Spotify"] move to workspace $ws4
       for_window [app_id="ulauncher"] border none
-      for_window [app_id="telegramdesktop"] move to workspace $ws3
       for_window  [title="rsmixer"] floating enable
       for_window [title="Choose Files"] floating enable
+      for_window [app_id="gnome-terminal-server"] floating enable; resize set 1860 600; move position 20 0;mark term;  move scratchpad
+      for_window [app_id="footclient"] floating enable; resize set 1860 600; move position 25 0;mark term;  move scratchpad
+      for_window [app_id="foot"] floating enable; resize set 1860 600; move position 25 0;mark term;  move scratchpad
 #some configuration for my laptop
-    set $laptop LVDS-1
-    bindswitch --reload --locked lid:on output $laptop disable
-    bindswitch --reload --locked lid:off output $laptop enable
 #monitor layout
     output HDMI-A-1 pos 0 0 mode 1920x1080@75.000Hz
     output DP-1 pos 1920 0 mode 1920x1080@74.973Hz transform 90 
     set $gnome-schema org.gnome.desktop.interface
 
     exec --no-startup-id {
-    #PipeWire is a newer technology for audio,has great potential,but apps are still buggy with it
-        pipewire
-        pipewire-pulse
-        wireplumber
+        swayosd-server --top-margin 0.02
         /lib/xdg-desktop-portal -r
-        /lib/xdg-desktop-portal-wlr
-        foot --server
+        /lib/xdg-desktop-portal-wlr -r
+        foot -s
+        footclient
 #        keepassxc
     #audio
         #pulseaudio
         # Notification Daemon
         swaync
 #        mako
-   #     swayidle -w timeout 600 'sudo zzz'
     }
-    exec {
-        #export $(dbus-launch)
-        #dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-        mpd
-	waybar
-        #corectrl ##### use a shell script like a chad
-        #sudo oc.sh
-        #Discord
-#        MOZ_ENABLE_WAYLAND=1 firefox
-#        mpc load all
-#        mpc shuffle
-        mpd-mpris
-        mpdscribble
-        gsettings set $gnome-schema gtk-theme 'adw-gtk3-dark'
-        gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-        gsettings set $gnome-schema cursor-theme 'Vimix Cursors - White'
-        gsettings set $gnome-schema font-name 'JetBrains Nerd Font Mono 11'
-        import-gsettings
-        /lib/kdeconnectd
-}
+        exec $term
+       exec ~/.config/sway/autostart.sh
+       exec swayidle -w \
+	timeout 900 '~/.config/sway/lock.sh' \
+	timeout 908 'swaymsg "output * power off"' \
+    timeout 10 'if pgrep -x gtklock; then swaymsg "output * power off"; fi' \
+	resume 'swaymsg "output * power on"'\
+    before-sleep '~/.config/sway/lock.sh'
     exec_always {
     #These always run when you reload sway
-#        killall fetchcord;fetchcord --noshell --nohost -t 15 -p
+#        killallclass fetchcord;fetchcord --noshell --nohost -t 15 -p
         gsettings set $gnome-schema gtk-theme adw-gtk3-dark
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         pkill waybar;waybar
 	/lib/polkit-gnome/polkit-gnome-authentication-agent-1
         #go run ~/Projects/go/main.go

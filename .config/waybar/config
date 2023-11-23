@@ -10,7 +10,7 @@
 	"max-length":40,
 	},
     "sway/language": {
-    	"format": "{shortDescription} 󰌌"
+    	"format": "{flag} {short} 󰌌"
     },
     "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",

@@ -27,4 +27,4 @@ export XDG_DOCUMENTS_DIR="$HOME/doc"
 export XDG_MUSIC_DIR="$HOME/mus"
 export XDG_PICTURES_DIR="$HOME/pic"
 export XDG_VIDEOS_DIR="$HOME/vid"
-
+export QT_QPA_PLATFORMTHEME=qt6ct

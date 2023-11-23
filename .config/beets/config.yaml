@@ -2,12 +2,14 @@ directory: ~/mus
 plugins: spotify fromfilename fetchart lyrics fish edit embedart smartplaylist mpdupdate play
 smartplaylist:
   relative_to: ~/mus
-  playlist_dir: ~/mus/playlists
+  playlist_dir: ~/mus
   playlists:
     - name: all.m3u
       query: ''
-    - name: Favorites.m3u
-      query: 'fav:1'
+    - name: vibe.m3u
+      query: ['artist:Phaseone', 'artist:Apashe', 'artist:FWLR', 'artist:Noisia', 'artist:F.O.O.L', 'artist:Habstrakt', 'artist: Skrillex', 'artist: Whipped Cream', 'artist:GG Magree', 'artist:RAM']
+    - name: ru.m3u
+      query: ['artist::[а-я]', 'artist:sunburst, the korea , OSCAL, Hard Bass School', 'song:bochka, vodka', 'album: action']
 mpd:
   host: localhost
   port: 6600
@@ -22,7 +24,7 @@ fetchart:
   auto: no
 embedart:
   auto: no
-  remove_art_file: yes
+  remove_art_file: no
 library: ~/.config/beets/musiclibrary.db
 import:
   move: yes
