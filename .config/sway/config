@@ -1,4 +1,4 @@
-#set thastsanput configs
+#set Input configs
     input "type:touchpad" {
     tap enabled
     events disabled
@@ -13,7 +13,7 @@
 	}
     input "type:keyboard" {
       xkb_layout workman,ir,ru
-      xkb_options grp:alt_space_toggle,caps:backspace,compose:ralt
+      xkb_options grp:alt_space_toggle,caps:backspace,compose:ralt,less:shift
     }
     input "2:10:TPPS/2_Elan_TrackPoint" {
         accel_profile adaptive
@@ -26,12 +26,13 @@ seat seat0 xcursor_theme 'Vimix Cursors - White' 24
 bindgesture swipe:4:up exec "echo 2 > /tmp/sovpipe"
 bindgesture swipe:4:left workspace prev
 bindgesture swipe:4:right workspace next
-bindgesture swipe:4:down exec pkill wofi || wofi -G -w 4 -S drun -W 80\% -H 40\% -I
-bindswitch lid:on exec "~/.config/sway/lock.sh & systemctl suspend"
+bindgesture swipe:4:down exec pkill rofi ||  rofi -show drun
+#bindswitch lid:on exec "systemctl suspend"
 bindswitch --locked lid:on exec systemctl suspend
 exec_always killall sov && rm -f /tmp/sovpipe ; mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -c 3 -n
 include /etc/sway/config.d/*
     set {
+    	$WOBSOCK $XDG_RUNTIME_DIR/wob.sock
         $mod Mod4
         $alt Mod1
 # set custom icons for workspaces
@@ -56,30 +57,33 @@ include /etc/sway/config.d/*
         $up l
         $right semicolon
 # Your preferred terminal emulator
-        $term footclient -e tmux
+        $term alacritty -e tmux
 #	 $term gnome-terminal -- tmux
     }
 #    workspace_auto_back_and_forth yes
     floating_modifier $mod normal
 #    output * bg ~/pic/heavenSentSkull.png fill
-    output * bg ~/.config/sway/wall.png fill
+    output * bg ~/.config/sway/wall.jpg fill
     #output DP-1 bg ~/.config/sway/wall-right.jpg fill
+    output LVDS-1 mode     1024x768@60.004Hz
 bindsym --to-code {
     # Sink volume optionally with --device
- --locked XF86AudioRaiseVolume exec swayosd-client --output-volume 2
 # Sink volume -optionally with --device
- --locked XF86AudioLowerVolume exec  swayosd-client --output-volume -2
+ --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+ --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+ --locked $mod+shift+minus exec pactl set-sink-volume @DEFAULT_SINK@ -2% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+ --locked $mod+shift+equal exec pactl set-sink-volume @DEFAULT_SINK@ +2% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
 # Sink volume toggle mute
- --locked XF86AudioMute exec swayosd-client --output-volume mute-toggle
- --locked $mod+shift+backspace exec swayosd-client --output-volume mute-toggle
+--locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ( [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = "Mute: yes" ] && echo 0 > $WOBSOCK ) || pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
+--locked $mod+shift+backspace exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ( [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = "Mute: yes" ] && echo 0 > $WOBSOCK ) || pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
 # Source volume toggle mute
  --locked XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
  # Brightness raise
---locked XF86MonBrightnessUp exec swayosd-client --brightness raise
---locked $mod+Control+equal exec swayosd-client --brightness raise
+--locked XF86MonBrightnessUp exec brightnessctl set +2% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+--locked $mod+Control+equal exec brightnessctl set +2% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
 # Brightness lower
---locked XF86MonBrightnessDown exec swayosd-client --brightness lower
---locked $mod+Control+minus exec swayosd-client --brightness lower
+--locked XF86MonBrightnessDown exec brightnessctl set 2%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+--locked $mod+Control+minus exec brightnessctl set 2%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
 
         # Toggle control center
 #        $mod+Shift+n exec swaync-client -t -sw
@@ -93,11 +97,11 @@ bindsym --to-code {
         $mod+shift+Return exec $term
 	$mod+Escape exec "~/.config/sway/lock.sh"
 	$mod+z exec "~/.config/sway/lock.sh"
-	$mod+shift+z exec "~/.config/sway/lock.sh& systemctl suspend"
-	$mod+shift+Control+z exec "~/.config/sway/lock.sh& systemctl hibernate"
+	$mod+shift+z exec "systemctl suspend"
+	$mod+shift+Control+z exec "systemctl hibernate"
         $mod+q kill
 #        $mod+r exec j4-dmenu-desktop --dmenu="bemenu -i --nb '#2b3339' --hb '#2b3339' --sb '#4b565c' --fbb '#2b3339' --scb '#2b3339' --tb '#2b3339' --fb '#2b3339' --ab '#2b3339' --nb '#2b3339' --hf '#dbbc7f' --tf '#e67e80' -H 32" #run app launcher
-        $mod+r exec pkill wofi || wofi -G -w 4 -S drun -W 80\% -H 40\% -I
+        $mod+r exec pkill rofi || rofi -show drun
         $mod+m exec "music"
         #$mod+r exec ulauncher
         $mod+Shift+c reload
@@ -165,15 +169,19 @@ bindsym --to-code {
     #playerctl is for managing your media player
     #dbus-send commands are shortcuts only for spotify
         --release --locked $mod+shift+bracketright exec playerctl next
+        --release --locked XF86AudioNext exec playerctl next
         --release --locked $mod+caps_lock exec mpc toggle
         --release $mod+shift+caps_lock exec playerctl play-pause
+        --release XF86AudioPlay exec playerctl play-pause
+        --release XF86AudioStop exec playerctl pause
         --release --locked $mod+bracketleft exec mpc prev
         --release $mod+shift+bracketleft exec playerctl previous
+        --release XF86AudioPrev exec playerctl previous
         --release $mod+shift+apostrophe exec playerctl play-pause
         --release --locked $mod+apostrophe exec mpc toggle
         --release --locked $mod+bracketright exec mpc next
         --locked $mod+equal exec mpc volume +2
-        --locked $mod+minus exec mpc volume -2
+        --locked $mod+minus exec mpc volume -5
 
         #enter shortcut mode
         $mod+e mode Shortcuts
@@ -189,14 +197,13 @@ bindsym --to-code {
         $mod+Control+up resize shrink height 10 px or 10 ppt
         $mod+Control+right resize grow width 10 px or 10 ppt
     #playerctl for function buttons
-        --locked $mod+shift+equal exec swayosd-client --output-volume 2
-        --locked $mod+shift+minus exec swayosd-client --output-volume -2
     #screenshot
         $mod+Print exec grimshot copy output
         $mod+shift+Print exec grimshot copy area
         $mod+Control+Print exec grimshot copy
         #$mod+b exec QT_QPA_PLATFORM=wayland brave --enable-gpu --ignore-gpu-blocklist --enable-gpu-rasterization --password-store=basic --enable-zero-copy --enable-native-gpu-memory-buffers --disable-experimental-web-platform-features --enable-unsafe-webgpu --use-cmd-decoder=passthrough --enable-gpu-compositing
         $mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
+        #$mod+b exec qutebrowser --qt-wrapper PyQt5 --backend webengine
     }
     include /etc/sway/config.d/*
     #popup_during_fullscreen smart
@@ -209,7 +216,6 @@ bindsym --to-code {
             v exec vlc
             b exec QT_QPA_PLATFORM=wayland brave
            # t exec XDG_CURRENT_DESKTOP=GNOME telegram-desktop & sleep 600;killall telegram-desktop
-            t exec ~/.config/sway/tg.sh
             Return mode "default"
             $mod+e mode "default"
             Escape mode "default"
@@ -243,15 +249,14 @@ bindsym --to-code {
         [class="Gimp-2.10"] move to workspace $ws5
     }
     for_window [class="TelegramDesktop"] move to workspace $ws3
-    for_window [app_id="firefox"] move to workspace $ws2
+    for_window [app_id="Firefox" app_id="org.qutebrowser.qutebrowser"] move to workspace $ws2
     for_window [app_id="org.telegram.desktop"] move to workspace $ws3
       for_window  [class="Spotify"] move to workspace $ws4
       for_window [app_id="ulauncher"] border none
       for_window  [title="rsmixer"] floating enable
       for_window [title="Choose Files"] floating enable
-      for_window [app_id="gnome-terminal-server"] floating enable; resize set 1860 600; move position 20 0;mark term;  move scratchpad
-      for_window [app_id="footclient"] floating enable; resize set 1860 600; move position 25 0;mark term;  move scratchpad
-      for_window [app_id="foot"] floating enable; resize set 1860 600; move position 25 0;mark term;  move scratchpad
+    for_window [app_id="Alacritty"] floating enable; resize set 98ppt 60ppt; move position 1ppt 0;mark term;  move scratchpad
+      for_window [class="Firefox" app_id="firefox" app_id="org.qutebrowser.qutebrowser"] inhibit_idle fullscreen
 #some configuration for my laptop
 #monitor layout
     output HDMI-A-1 pos 0 0 mode 1920x1080@75.000Hz
@@ -260,10 +265,9 @@ bindsym --to-code {
 
     exec --no-startup-id {
         swayosd-server --top-margin 0.02
-        /lib/xdg-desktop-portal -r
-        /lib/xdg-desktop-portal-wlr -r
-        foot -s
-        footclient
+        /usr/libexec/xdg-desktop-portal -r
+        /usr/libexec/xdg-desktop-portal-wlr -r
+        /usr/libexec/polkit-gnome-authentication-agent-1
 #        keepassxc
     #audio
         #pulseaudio
@@ -272,20 +276,21 @@ bindsym --to-code {
 #        mako
     }
         exec $term
-       exec ~/.config/sway/autostart.sh
+        exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+        exec ~/.config/sway/autostart.sh
+        exec $HOME/.local/bin/tamefox
+
        exec swayidle -w \
-	timeout 900 '~/.config/sway/lock.sh' \
-	timeout 908 'swaymsg "output * power off"' \
     timeout 10 'if pgrep -x gtklock; then swaymsg "output * power off"; fi' \
-	resume 'swaymsg "output * power on"'\
+	  resume 'swaymsg "output * power on"'\
     before-sleep '~/.config/sway/lock.sh'
     exec_always {
     #These always run when you reload sway
 #        killallclass fetchcord;fetchcord --noshell --nohost -t 15 -p
         gsettings set $gnome-schema gtk-theme adw-gtk3-dark
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-        pkill waybar;waybar
-	/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+        pkill waybar;GTK_THEME=adw-gtk3-dark waybar
+
         #go run ~/Projects/go/main.go
 #        redwal
                 }

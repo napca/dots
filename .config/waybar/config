@@ -60,6 +60,7 @@
     },
     "tray": {
         "reverse-direction": true,
+        "icon-size": 12,
         "spacing": 20
     },
     "clock": {
@@ -77,7 +78,7 @@
         "format-icons": [""]
     },
     "backlight": {
-        // "device": "acpi_video1",
+         "device": "acpi_video0",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },

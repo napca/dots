@@ -38,6 +38,7 @@ xkb_symbols "workman" {
     key <AB05> {  [   v,  V   ] };
     key <AB06> {  [   k,  K   ] };
     key <AB07> {  [   l,  L   ] };
+    key <LSGT> {  [   Shift_L,  Shift_L   ] };
     // End alphanumeric section
 
     key <CAPS> { [    BackSpace,       Escape,       BackSpace,        BackSpace ] };
@@ -83,6 +84,7 @@ xkb_symbols "workman-intl" {
     key <AB06> { [     k,          K,            oe,               OE ] };
     key <AB07> { [     l,          L,        oslash,         Ooblique ] };
     // End alphanumeric section
+    key <LSGT> {  [   Shift_L,  Shift_L   ] };
 
     key <CAPS> { [ BackSpace, Escape,     BackSpace,        BackSpace ] };
 
