@@ -1,9 +1,10 @@
 #!//usr/bin/env bash
 (sleep 0.3;GTK_THEME=adw-gtk3-dark waybar) &
 pipewire &
-pulseaudio &
-sleep 0.3; wireplumber &
-sleep 0.5;(mpd; mpc clear;mpc load all; mpc random; mpc repeat; mpc shuffle; mpd-mpris) &
+pipewire-pulse &
+#pulseaudio &
+sleep 0.6; wireplumber &
+sleep 0.9;(mpd; mpc clear;mpc load all; mpc random; mpc repeat; mpc shuffle; mpd-mpris) &
 #sleep 0.4;(nekoray &
 #firefox &
 #QT_QPA_PLATFORMTHEME=gtk3 telegram-desktop) &

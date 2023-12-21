@@ -202,8 +202,8 @@ bindsym --to-code {
         $mod+shift+Print exec grimshot copy area
         $mod+Control+Print exec grimshot copy
         #$mod+b exec QT_QPA_PLATFORM=wayland brave --enable-gpu --ignore-gpu-blocklist --enable-gpu-rasterization --password-store=basic --enable-zero-copy --enable-native-gpu-memory-buffers --disable-experimental-web-platform-features --enable-unsafe-webgpu --use-cmd-decoder=passthrough --enable-gpu-compositing
-        $mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
-        #$mod+b exec qutebrowser --qt-wrapper PyQt5 --backend webengine
+        #$mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
+        $mod+b exec qutebrowser --qt-wrapper PyQt5 --backend webengine
     }
     include /etc/sway/config.d/*
     #popup_during_fullscreen smart
@@ -278,7 +278,7 @@ bindsym --to-code {
         exec $term
         exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
         exec ~/.config/sway/autostart.sh
-        exec $HOME/.local/bin/tamefox
+#        exec $HOME/.local/bin/tamefox
 
        exec swayidle -w \
     timeout 10 'if pgrep -x gtklock; then swaymsg "output * power off"; fi' \

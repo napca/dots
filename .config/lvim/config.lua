@@ -6,18 +6,18 @@
 vim.cmd("set wrap")
 vim.cmd("set linebreak")
 vim.cmd("source ~/.config/nvim/workman.vim")
-lvim.plugins= {
-   "Mofiqul/adwaita.nvim",
-   lazy = false,
-   priority = 1000,
-    -- configure and set on startup
-   config = function()
-     vim.g.adwaita_darker = true             -- for darker version
---     vim.g.adwaita_disable_cursorline = true -- to disable cursorline
---     vim.g.adwaita_transparent = true        -- makes the background transparent
-     vim.cmd('colorscheme adwaita')
-   end,
-   "sainnhe/gruvbox-material",
+lvim.plugins = {
+  "Mofiqul/adwaita.nvim",
+  lazy = false,
+  priority = 1000,
+  -- configure and set on startup
+  config = function()
+    vim.g.adwaita_darker = true -- for darker version
+    --     vim.g.adwaita_disable_cursorline = true -- to disable cursorline
+    --     vim.g.adwaita_transparent = true        -- makes the background transparent
+    vim.cmd('colorscheme adwaita')
+  end,
+  "sainnhe/gruvbox-material",
   config = function()
     vim.g.gruvbox_material_background = 'soft'
     vim.g.gruvbox_material_better_performance = true
@@ -25,4 +25,12 @@ lvim.plugins= {
     vim.g.lightline = "{'colorscheme' : 'gruvbox-material'}"
   end,
 }
-lvim.colorscheme="gruvbox-material"
+lvim.colorscheme = "gruvbox-material"
+lvim.format_on_save.enabled = true
+vim.opt.shell = "/bin/sh"
+-- add `pyright` to `skipped_servers` list
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+-- remove `jedi_language_server` from `skipped_servers` list
+lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+  return server ~= "pylsp"
+end, lvim.lsp.automatic_configuration.skipped_servers)
