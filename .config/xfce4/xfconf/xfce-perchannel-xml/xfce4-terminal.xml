@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-terminal" version="1.0">
+  <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
+  <property name="misc-menubar-default" type="bool" value="false"/>
+  <property name="misc-borders-default" type="bool" value="false"/>
+  <property name="color-foreground" type="string" value="#ddc7a1"/>
+  <property name="color-background" type="string" value="#141617"/>
+  <property name="color-background-vary" type="bool" value="false"/>
+  <property name="color-cursor-foreground" type="string" value=""/>
+  <property name="color-cursor" type="string" value=""/>
+  <property name="color-cursor-use-default" type="bool" value="true"/>
+  <property name="color-selection" type="string" value=""/>
+  <property name="color-selection-background" type="string" value=""/>
+  <property name="color-selection-use-default" type="bool" value="true"/>
+  <property name="color-bold" type="string" value=""/>
+  <property name="color-bold-use-default" type="bool" value="true"/>
+  <property name="color-palette" type="string" value="rgb(40,40,40);rgb(234,105,98);rgb(169,182,101);rgb(216,166,87);rgb(61,104,94);rgb(211,134,155);rgb(137,180,130);rgb(168,153,132);rgb(124,111,100);rgb(234,105,98);rgb(169,182,101);rgb(216,166,87);rgb(61,104,94);rgb(211,134,155);rgb(137,180,130);rgb(221,199,161)"/>
+  <property name="color-bold-is-bright" type="bool" value="true"/>
+  <property name="color-use-theme" type="bool" value="false"/>
+  <property name="tab-activity-color" type="string" value="#3c1f1e"/>
+</channel>
