@@ -23,16 +23,21 @@ settings:
   bindings.commands:
     global:
       caret:
+        $: move-to-end-of-line
+        '0': move-to-start-of-line
         C: selection-toggle --line
         E: scroll down
+        G: move-to-end-of-document
         I: scroll right
         J: yank selection -s
         N: scroll left
         O: scroll up
-        Y: yank selection -s
+        '[': move-to-start-of-prev-block
+        ']': move-to-start-of-next-block
         c: selection-toggle
         d: move-to-next-word
         e: move-to-next-line
+        gg: move-to-start-of-document
         i: move-to-next-char
         j: yank selection
         m: mode-enter normal
@@ -41,64 +46,22 @@ settings:
         p: selection-reverse
         r: move-to-end-of-word
         v: move-to-prev-word
-      command:
-        <Alt+h>: rl-kill-word
-        <Alt+t>: rl-forward-word
-        <Alt+v>: rl-backward-word
-        <Ctrl+;>: command-history-prev
-        <Ctrl+Shift+m>: completion-item-yank --sel
-        <Ctrl+d>: rl-unix-word-rubout
-        <Ctrl+e>: rl-kill-line
-        <Ctrl+f>: rl-unix-line-discard
-        <Ctrl+h>: completion-item-del
-        <Ctrl+j>: rl-yank
-        <Ctrl+k>: command-history-next
-        <Ctrl+m>: completion-item-yank
-        <Ctrl+r>: rl-end-of-line
-        <Ctrl+t>: rl-forward-char
-        <Ctrl+w>: hint --rapid links tab-bg
-        <Ctrl+y>: rl-backward-delete-char
-      hint:
-        <Ctrl+t>: hint links
-        <Ctrl+v>: hint all tab-bg
-        <Ctrl+w>: hint --rapid links tab-bg
-      insert:
-        <Ctrl+r>: edit-text
+        '{': move-to-end-of-prev-block
+        '}': move-to-end-of-next-block
       normal:
-        '"': 'cmd-set-text :'
-        '''U': hint images tab
-        '''t': hint all tab-fg
-        '''u': hint images
-        '''v': hint all tab-bg
-        '''y': hint all hover
-        ':': null
         '::': open -t -- {primary}
         :;: open -t -- {clipboard}
         ';:': open -- {primary}
         ;;: open -- {clipboard}
-        <Alt+l>: tab-mute
-        <Ctrl+;>: tab-pin
-        <Ctrl+Alt+;>: print
-        <Ctrl+Shift+d>: close
-        <Ctrl+Shift+k>: open -p
-        <Ctrl+Shift+t>: undo
-        <Ctrl+b>: open -t
-        <Ctrl+d>: tab-close
-        <Ctrl+f>: scroll-page 0 -0.5
-        <Ctrl+h>: scroll-page 0 0.5
-        <Ctrl+k>: open -w
-        <Ctrl+t>: scroll-page 0 1
-        <Ctrl+v>: scroll-page 0 -1
-        <Ctrl+y>: home
         B: cmd-set-text -sr :tab-focus
         C: mode-enter caret ;; selection-toggle --line
         E: tab-prev
         F: undo -w
+        G: scroll-to-perc
         H: tab-close -o
         I: forward
         K: search-prev
         L: bookmark-add
-        M: hint links spawn mpv {hint-url}
         N: back
         O: tab-next
         P: cmd-set-text -s :open -t
@@ -108,24 +71,48 @@ settings:
         V: cmd-set-text -s :quickmark-load -t
         W: reload -f
         Y: 'cmd-set-text :'
+        ZQ: quit
+        ZZ: quit --save
         ah: download-cancel
-        b: null
+        b:Y: config-cycle -p -u *://*.{url:host}/* content.plugins ;; reload
+        b:f: config-cycle -p -u {url} content.plugins ;; reload
+        b:y: config-cycle -p -u *://{url:host}/* content.plugins ;; reload
+        b;Y: config-cycle -p -t -u *://*.{url:host}/* content.plugins ;; reload
+        b;f: config-cycle -p -t -u {url} content.plugins ;; reload
+        b;y: config-cycle -p -t -u *://{url:host}/* content.plugins ;; reload
+        bMY: config-cycle -p -u *://*.{url:host}/* content.cookies.accept all no-3rdparty
+          never ;; reload
+        bMf: config-cycle -p -u {url} content.cookies.accept all no-3rdparty never
+          ;; reload
+        bMy: config-cycle -p -u *://{url:host}/* content.cookies.accept all no-3rdparty
+          never ;; reload
+        bSY: config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; reload
         bSf: config-cycle -p -u {url} content.javascript.enabled ;; reload
         bSy: config-cycle -p -u *://{url:host}/* content.javascript.enabled ;; reload
-        bd: open -t vault.bitwarden.com/#/vault
+        bUY: config-cycle -p -u *://*.{url:host}/* content.images ;; reload
+        bUf: config-cycle -p -u {url} content.images ;; reload
+        bUy: config-cycle -p -u *://{url:host}/* content.images ;; reload
         bi: forward -t
+        bmY: config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept all no-3rdparty
+          never ;; reload
+        bmf: config-cycle -p -t -u {url} content.cookies.accept all no-3rdparty never
+          ;; reload
+        bmy: config-cycle -p -t -u *://{url:host}/* content.cookies.accept all no-3rdparty
+          never ;; reload
         bn: back -t
         bsY: config-cycle -p -t -u *://*.{url:host}/* content.javascript.enabled ;;
           reload
         bsf: config-cycle -p -t -u {url} content.javascript.enabled ;; reload
         bsy: config-cycle -p -t -u *://{url:host}/* content.javascript.enabled ;;
           reload
-        by: back -t
+        buY: config-cycle -p -t -u *://*.{url:host}/* content.images ;; reload
+        buf: config-cycle -p -t -u {url} content.images ;; reload
+        buy: config-cycle -p -t -u *://{url:host}/* content.images ;; reload
         c: mode-enter caret
-        d: null
         'd:': open -w -- {primary}
         d;: open -w -- {clipboard}
         dP: cmd-set-text :open -w {url:pretty}
+        dUd: devtools window
         dUe: devtools bottom
         dUi: devtools right
         dUn: devtools left
@@ -140,18 +127,18 @@ settings:
         dv: cmd-set-text -s :quickmark-load -w
         e: scroll down
         f: undo
-        gE: tab-move +
+        gE: tab-move -
         gF: navigate up -t
         gH: tab-give
         gM: tab-clone
-        gO: tab-move -
+        gO: tab-move +
         gP: cmd-set-text :open -t -r {url:pretty}
         gV: cmd-set-text -s :bookmark-load -t
+        g^: tab-focus 1
         gb: cmd-set-text -s :tab-select
         gf: navigate up
         gh: download
         gl: tab-move
-        go: null
         gp: cmd-set-text :open {url:pretty}
         gt: view-source
         gu: hint inputs --first
@@ -171,20 +158,18 @@ settings:
         jl: yank inline [{title}]({url})
         k: search-next
         l: quickmark-save
-        m: null
         mh: download-clear
         mp: tab-only
         n: scroll left
         o: scroll up
         p: cmd-set-text -s :open
-        r: null
-        si: cmd-set-text -s :set -t
-        sn: cmd-set-text -s :bind
+        se: cmd-set-text -s :bind
+        so: cmd-set-text -s :set -t
+        ss: cmd-set-text -s :set
         st: save
         t: hint
         u: mode-enter insert
         v: cmd-set-text -s :quickmark-load
-        vd: open -t bitwarden.com/#/vault
         w: reload
         xP: cmd-set-text :open -b -r {url:pretty}
         xp: cmd-set-text -s :open -b
@@ -194,28 +179,19 @@ settings:
         yW: hint --rapid links window
         yb: hint inputs
         yh: hint links download
-        yj: hint links yank
-        yn: hint all hover
         yp: hint links fill :open {hint-url}
         yt: hint all tab-fg
         yu: hint images
         yv: hint all tab-bg
         yw: hint --rapid links tab-bg
-      prompt:
-        <Alt+Shift+j>: prompt-yank --sel
-        <Alt+j>: prompt-yank
-        <Ctrl+;>: prompt-open-download --pdfjs
-  bindings.key_mappings:
-    global:
-      <Ctrl-6>: <Ctrl-^>
-      <Ctrl-Enter>: <Ctrl-Return>
-      <Ctrl-I>: <Tab>
-      <Ctrl-J>: <Return>
-      <Ctrl-M>: <Return>
-      <Ctrl-[>: <Escape>
-      <Enter>: <Return>
-      <Shift-Enter>: <Return>
-      <Shift-Return>: <Return>
+        yy: hint links yank
+        '{{': navigate prev -t
+        '}}': navigate next -t
+      yesno:
+        N: prompt-accept --save no
+        Y: prompt-accept --save yes
+        n: prompt-accept no
+        y: prompt-accept yes
   colors.completion.category.bg:
     global: '#3b4252'
   colors.completion.category.border.bottom:
@@ -408,7 +384,7 @@ settings:
   colors.tabs.selected.odd.fg:
     global: '#ebcb8b'
   colors.webpage.bg:
-    global: '#ECEFF4'
+    global: white
   colors.webpage.darkmode.algorithm:
     global: lightness-cielab
   colors.webpage.darkmode.contrast:
@@ -418,7 +394,7 @@ settings:
   colors.webpage.darkmode.policy.images:
     global: never
   colors.webpage.preferred_color_scheme:
-    global: dark
+    global: auto
   content.blocking.enabled:
     global: false
   content.blocking.method:
@@ -428,6 +404,8 @@ settings:
   content.geolocation:
     https://www.kucoin.com: false
     https://www.speedtest.net: true
+  content.javascript.clipboard:
+    global: access
   content.javascript.enabled:
     global: true
   content.javascript.modal_dialog:
@@ -450,6 +428,7 @@ settings:
   content.notifications.enabled:
     https://1401.tamland.ir: false
     https://app.element.io: true
+    https://chat.tchncs.de: true
     https://download.ir: false
     https://emalls.ir: false
     https://igg-games.com: false

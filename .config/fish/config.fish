@@ -2,7 +2,7 @@ set fish_greeting
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
-alias sway "MOZ_ENABLE_WAYLAND=1 BEMENU_BACKEND='wayland' CLUTTER_BACKEND='wayland' ECORE_EVAS_ENGINE='wayland_egl' ELM_ENGINE='wayland_egl' GDK_BACKEND='wayland' QT_AUTO_SCREEN_SCALE_FACTOR=0 QT_QPA_PLATFORM='wayland-egl' QT_WAYLAND_DISABLE_WINDOWDECORATION=1 SAL_USE_VCLPLUGIN='gtk3' SDL_VIDEODRIVER='wayland' _JAVA_AWT_WM_NONREPARENTING=1 QT_QPA_PLATFORMTHEME=qt5ct XDG_CURRENT_DESKTOP=Sway XDG_SESSION_TYPE=wayland /bin/sway"
+alias ssway "MOZ_ENABLE_WAYLAND=1 BEMENU_BACKEND='wayland' CLUTTER_BACKEND='wayland' ECORE_EVAS_ENGINE='wayland_egl' ELM_ENGINE='wayland_egl' GDK_BACKEND='wayland' QT_AUTO_SCREEN_SCALE_FACTOR=0 QT_QPA_PLATFORM='wayland-egl' QT_WAYLAND_DISABLE_WINDOWDECORATION=1 SAL_USE_VCLPLUGIN='gtk3' SDL_VIDEODRIVER='wayland' _JAVA_AWT_WM_NONREPARENTING=1 QT_QPA_PLATFORMTHEME=qt5ct XDG_CURRENT_DESKTOP=Sway XDG_SESSION_TYPE=wayland dbus-run-session sway"
 alias m 'ncmpcpp'
 set HISTFILE ~/.fish_history
 set HISTSIZE 10000
@@ -38,7 +38,6 @@ alias lt 'lsd -aT --color=always ' # tree listing
 alias cp "cp -i"                          # confirm before overwriting something
 alias df 'df -h'                          # human-readable sizes
 alias free 'free -m'                      # show sizes in MB
-alias lynx 'lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
 alias ghch 'zathura ~/study/ghalamchi.pdf'
 alias stsch 'gimp ~/study/sched.jpg'
 
@@ -54,7 +53,7 @@ set LESS_TERMCAP_us '\e[1;4;31m'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 alias update 'sudo pacman -Sy;paru -Qu && sleep 1 && doas powerpill -Su && paru -Su'
-~/.config/fish/bars;pfetch;~/.config/fish/bars
+#~/.config/fish/bars;pfetch;~/.config/fish/bars
 alias xi 'sudo xbps-install'
 alias xu 'sudo xbps-install -Su'
 alias xq 'sudo xbps-query -Rs'
@@ -79,5 +78,6 @@ alias zzz 'swaylock -c 000000 & sudo /usr/bin/zzz'
 alias ZZZ 'swaylock -c 000000 & sudo /usr/bin/ZZZ'
 alias lock 'swaylock -c 000000'
 if test (tty) = "/dev/tty1"
- dbus-run-session sway
+  ssway
+  # dbus-run-session sway
 end

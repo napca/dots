@@ -27,7 +27,6 @@ lvim.plugins = {
 }
 lvim.colorscheme = "gruvbox-material"
 lvim.format_on_save.enabled = true
-vim.opt.shell = "/bin/sh"
 -- add `pyright` to `skipped_servers` list
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- remove `jedi_language_server` from `skipped_servers` list

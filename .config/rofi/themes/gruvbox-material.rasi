@@ -42,8 +42,9 @@ window {
     location: center;
     anchor:   center;
     border-radius: 10px;
-    height: 560px;
-    width: 600px;
+    height: 530px;
+    width: 950px;
+    dynamic: true;
 
     background-color: @transparent;
     spacing: 0;
@@ -53,6 +54,7 @@ window {
 
 mainbox {
     spacing: 0;
+    dynamic: true;
     children: [ inputbar, message, listview ];
 }
 
@@ -88,7 +90,8 @@ listview {
     border: 2px 2px 2px 2px;
     border-color: @gruv0;
     background-color: @gruv0;
-    dynamic: false;
+    dynamic: true;
+    columns:  4;
 }
 
 element {
@@ -131,6 +134,7 @@ element-text, element-icon {
     vertical-align: 0.5;
     background-color: inherit;
     text-color: @gruv6;
+    dynamic: true;
 }
 
 button {
