@@ -3,7 +3,7 @@
 <channel name="xfce4-terminal" version="1.0">
   <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
   <property name="misc-menubar-default" type="bool" value="false"/>
-  <property name="misc-borders-default" type="bool" value="false"/>
+  <property name="misc-borders-default" type="bool" value="true"/>
   <property name="color-foreground" type="string" value="#ddc7a1"/>
   <property name="color-background" type="string" value="#141617"/>
   <property name="color-background-vary" type="bool" value="false"/>
@@ -19,4 +19,5 @@
   <property name="color-bold-is-bright" type="bool" value="true"/>
   <property name="color-use-theme" type="bool" value="false"/>
   <property name="tab-activity-color" type="string" value="#3c1f1e"/>
+  <property name="scrolling-bar" type="string" value="TERMINAL_SCROLLBAR_NONE"/>
 </channel>

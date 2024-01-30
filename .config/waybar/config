@@ -1,6 +1,6 @@
 {
     "spacing": 0,
-    "modules-left": ["sway/workspaces", "sway/scratchpad", "mpd"],
+    "modules-left": ["wlr/workspaces", "sway/scratchpad", "mpd"],
     "modules-center": ["sway/window"],
     "modules-right": ["tray", "pulseaudio", "temperature", "backlight", "sway/language", "battery", "network", "clock", "custom/power"],
     "custom/void-linux": {
@@ -60,8 +60,8 @@
     },
     "tray": {
         "reverse-direction": true,
-        "icon-size": 12,
-        "spacing": 20
+        "icon-size": 11,
+        "spacing": 5 
     },
     "clock": {
         "tooltip-format": "{:%A %B %d %Y | %H:%M}",

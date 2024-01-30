@@ -1,5 +1,5 @@
 directory: ~/mus
-plugins: spotify fromfilename fetchart lyrics fish edit embedart smartplaylist mpdupdate play
+plugins: deezer fromfilename fetchart lyrics fish edit embedart smartplaylist mpdupdate play
 smartplaylist:
   relative_to: ~/mus
   playlist_dir: ~/mus
@@ -16,8 +16,10 @@ mpd:
 play:
   command: /home/napca/.config/beets/play.sh
 
-spotify: 
+deezer:
   source_weight: 0.0
+spotify: 
+  source_weight: 0.5
 lyrics:
   auto: no
 fetchart:
@@ -32,4 +34,8 @@ import:
   write: yes
   duplicate_action: merge
   group_albums: yes
+aunique:
+  keys: albumartist album
+  disambiguators: albumtype year label
+  bracket: '[]'
 

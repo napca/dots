@@ -9,4 +9,4 @@ swaync-client -cp
 #wait
 
 #exec gtklock -m playerctl-module -m powerbar-module -m userinfo-module -T 4 --art-size 128 -H --show-labels -S -L '/home/napca/.config/sway/prelock.sh' --horizontal-layout --show-hidden -s ~/.config/gtklock/style.css "$@"
-swaylock -k -c 101010
+pgrep -x swaylock || swaylock -k -c 101010

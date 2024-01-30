@@ -1,5 +1,5 @@
 configuration {
-    font: "JetBrains Mono 11";
+    font: "FiraSans 11";
     icon-theme: "Papirus-Dark";
 
     display-ssh:    "󰣀 ssh:";

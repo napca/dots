@@ -1,7 +1,6 @@
 * {
-    font-family: Fira Sans Book;
+    font-family: FiraSans Nerd Font Regular;
     font-size: 10px;
-    font-weight: 500;
     color: #d4be98;
 }
 
@@ -37,7 +36,7 @@ window#waybar {
 #language,
 #pulseaudio,
 #tray {
-    padding: 0px 2px;
+    padding: 0px 0px;
     background-color: transparent;
 }
 

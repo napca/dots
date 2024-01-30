@@ -5,6 +5,7 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 vim.cmd("set wrap")
 vim.cmd("set linebreak")
+vim.cmd("set termbidi")
 vim.cmd("source ~/.config/nvim/workman.vim")
 lvim.plugins = {
   "Mofiqul/adwaita.nvim",

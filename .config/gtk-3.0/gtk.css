@@ -97,4 +97,4 @@ windowcontrols > button.maximize:backdrop,
 windowcontrols > button.minimize:backdrop {
   background-color: #665c54;
 }
-
+@import 'colors.css';
