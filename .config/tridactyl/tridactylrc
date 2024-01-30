@@ -12,6 +12,7 @@ set usekeytranslatemap false
 
 " Binds
 unbind h
+unbind <C-a>
 bind --mode=hint <Backspace> hint.popKey
 bind --mode=hint <Escape> hint.reset
 bind --mode=hint <C-[> hint.reset
@@ -46,8 +47,6 @@ bind ]] followpage next
 bind [[ followpage prev
 bind [c urlincrement -1
 bind ]c urlincrement 1
-bind <C-x> urlincrement -1
-bind <C-a> urlincrement 1
 bind T current_url tabopen
 bind yy clipboard yank
 bind ys clipboard yankshort
@@ -179,6 +178,12 @@ bind . repeat
 bind <AS-ArrowUp><AS-ArrowUp><AS-ArrowDown><AS-ArrowDown><AS-ArrowLeft><AS-ArrowRight><AS-ArrowLeft><AS-ArrowRight>ba open https://www.youtube.com/watch?v=M3iOROuTuMA
 bind m gobble 1 markadd
 bind ` gobble 1 markjump
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
 bind --mode=visual j js document.getSelection().modify("extend","backward","character")
 bind --mode=visual k js document.getSelection().modify("extend","forward","line")
 bind --mode=visual l js document.getSelection().modify("extend","backward","line")

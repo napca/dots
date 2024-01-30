@@ -27,6 +27,7 @@ window#waybar {
     background-color: rgba(243, 139, 168, 0.2);
 }
 
+#clock,
 #custom-power,
 #battery,
 #memory,
@@ -36,7 +37,7 @@ window#waybar {
 #language,
 #pulseaudio,
 #tray {
-    padding: 0px 0px;
+    padding-right: 7px;
     background-color: transparent;
 }
 
@@ -87,26 +88,22 @@ window#waybar {
 .modules-left{
   background-color:#3c3836;
   border-radius:8px;
-  margin:2px;
-  margin-bottom:0px;
   padding-left:5px;
   padding-right:5px;
+  margin:3px;
 }
 .modules-right{
   background-color:#3c3836;
   border-radius:8px;
-  padding-left:5px;
-  padding-right:5px;
-  margin:2px;
-  margin-bottom:0px;
+  padding-left:0px;
+  margin:3px;
 }
 #window{
   background-color:#3c3836;
   border-radius:8px;
   padding-left:5px;
   padding-right:5px;
-  margin:2px;
-  margin-bottom:0px;
+  margin:3px;
 }
 window#waybar.empty #window{
   background-color:transparent;
