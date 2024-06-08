@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in "$@"; do
+    out+=" $i"
+done
+echo "$out"
+killall rofi || rofi $out
