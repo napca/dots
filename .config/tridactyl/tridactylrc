@@ -30,8 +30,8 @@ bind --mode=normal K tabprev
 bind --mode=normal L tabnext
 bind --mode=normal : forward
 bind --mode=normal j scrollpx -50
-bind --mode=normal k scrollline 6
-bind --mode=normal l scrollline -6
+bind --mode=normal k scrollline 3
+bind --mode=normal l scrollline -3
 bind --mode=normal ; scrollpx 50
 bind hx hint -F e => { const pos = tri.dom.getAbsoluteCentre(e); tri.excmds.exclaim_quiet("xdotool mousemove --sync " + window.devicePixelRatio * pos.x + " " + window.devicePixelRatio * pos.y + "; xdotool click 1")}
 bind hX hint -F e => { const pos = tri.dom.getAbsoluteCentre(e); tri.excmds.exclaim_quiet("xdotool mousemove --sync " + window.devicePixelRatio * pos.x + " " + window.devicePixelRatio * pos.y + "; xdotool keydown ctrl+shift; xdotool click 1; xdotool keyup ctrl+shift")}

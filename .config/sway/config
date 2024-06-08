@@ -1,11 +1,11 @@
 #set Input configs
 input "type:touchpad" {
-  tap enabled
-  events disabled
-  pointer_accel 0.6
+  tap disabled
+  #events disabled
   dwtp enabled
   dwt enabled
   accel_profile adaptive
+  pointer_accel 0.2
 }
 input "1133:16468:Logitech_Wireless_Mouse" {
   accel_profile "flat"
@@ -18,7 +18,7 @@ input "type:keyboard" {
 input "2:10:TPPS/2_Elan_TrackPoint" {
   accel_profile adaptive
   dwt enabled
-  pointer_accel -0.37
+  pointer_accel -0.24
   scroll_factor 0.67
 }
 
@@ -49,10 +49,10 @@ set {
   $bglight	  #15161e
 }
 ##Home row direction keys
-set $left j
-set $down k
-set $up l
-set $right semicolon
+set $left n
+set $down e
+set $up o
+set $right i
 
 #Your preferred terminal emulator
 set $term xfce4-terminal -T floatingTerminal -e tmux
@@ -75,7 +75,7 @@ set $brightup swayosd-client --brightness raise
 floating_modifier $mod normal
 output * bg ~/.config/sway/wall.png fill
 output LVDS-1 mode     1024x768@60Hz
-output eDP-1 scale 1.4
+output eDP-1 scale 1.3
 
 seat seat0 xcursor_theme 'Vimix-white-cursors' 24
 bindgesture {
@@ -95,7 +95,7 @@ bindsym --to-code {
 
   # Sink volume toggle mute
   --locked XF86AudioMute exec $volmute
-  --locked $mod+shift+backspace exec $volmute
+   --locked $mod+shift+0 exec $volmute
 
   # Source volume toggle mute
   --locked XF86AudioMicMute exec $micmute
@@ -108,11 +108,11 @@ bindsym --to-code {
   --locked $mod+Control+minus exec $brightdown
 
 ##   Toggle control center
-  $mod+Shift+b exec killall waybar || waybar
-  $mod+Shift+n exec swaync-client -t -sw
-  $mod+Control+e input type:keyboard xkb_switch_layout 0
-  $mod+Control+f input type:keyboard xkb_switch_layout 1
-  $mod+Control+r input type:keyboard xkb_switch_layout 2
+  $mod+Shift+v exec killall waybar || GTK_THEME=adw-gtk3-dark waybar
+  $mod+Shift+k exec swaync-client -t -sw
+  $mod+Control+r input type:keyboard xkb_switch_layout 0
+  $mod+Control+t input type:keyboard xkb_switch_layout 1
+  $mod+Control+w input type:keyboard xkb_switch_layout 2
   --release $alt+Space exec notify-send $(swaymsg -t get_inputs | jq '.[0].xkb_active_layout_name'|tr -d '"') -t 650 -e
   $mod+shift+x exec swaymsg "output * dpms off"
   $mod+x exec swaymsg "output * dpms on"
@@ -124,11 +124,11 @@ bindsym --to-code {
 	$mod+shift+Control+z exec "systemctl hibernate"
   $mod+q kill
 #  $mod+r exec j4-dmenu-desktop --dmenu="bemenu -i --nb '#2b3339' --hb '#2b3339' --sb '#4b565c' --fbb '#2b3339' --scb '#2b3339' --tb '#2b3339' --fb '#2b3339' --ab '#2b3339' --nb '#2b3339' --hf '#dbbc7f' --tf '#e67e80' -H 32" #run app launcher
-  $mod+r exec pkill rofi || rofi -show drun -show-icons
-  $mod+e exec pkill rofi || rofi -show emoji
-  $mod+m exec "music"
+  $mod+w exec pkill rofi || rofi -show drun -show-icons
+  $mod+r exec pkill rofi || rofi -show emoji
+  $mod+l exec "music"
 #  $mod+r exec ulauncher
-  $mod+Shift+c reload
+  $mod+Shift+m reload
 ##change focus
   $mod+$left focus left
   $mod+$down focus down
@@ -166,19 +166,19 @@ bindsym --to-code {
   $mod+Shift+5 move container to workspace $ws5
   $mod+Shift+6 move container to workspace $ws6
 ##shortcuts for multi-monitor management
-  $mod+n exec swaync-client -t -sw
+  $mod+k exec swaync-client -t -sw
 #  $mod+shift+n move output left
   $mod+shift+tab move output left
   $mod+Control+tab move workspace to output left
-  $mod+Control+n move workspace to output left
+  $mod+Control+k move workspace to output left
 ##switch between sway's layouts
-  $mod+u layout tabbed
-  $mod+i splitv
-  $mod+o layout toggle split
-  $mod+p splith
+  $mod+f layout tabbed
+  $mod+u splitv
+  $mod+p layout toggle split
+  $mod+semicolon splith
 
-  $mod+f fullscreen
-  $mod+shift+f fullscreen global
+  $mod+t fullscreen
+  $mod+shift+t fullscreen global
 
   $mod+Shift+space floating toggle
   $mod+space focus mode_toggle
@@ -186,14 +186,14 @@ bindsym --to-code {
   $mod+a focus parent
 
   #basically a window that you can hide and show on your focused workspace
-  $mod+Shift+0 move scratchpad
-  $mod+Shift+v move scratchpad
+  $mod+Shift+9 move scratchpad
+  $mod+Shift+c move scratchpad
   #show scratchpad
-  $mod+0 scratchpad show
-  $mod+v scratchpad show
+  $mod+9 scratchpad show
+  $mod+c scratchpad show
   #playerctl is for managing your media player
 
-  --release $mod+shift+caps_lock exec playerctl play-pause
+  --release $mod+shift+backspace exec playerctl play-pause
 
   --release $mod+shift+bracketleft exec playerctl previous
   --release $mod+shift+apostrophe exec playerctl play-pause
@@ -205,7 +205,7 @@ bindsym --to-code {
   --release --locked XF86AudioNext exec playerctl next
 
 
-  --release --locked $mod+caps_lock exec mpc toggle
+  --release --locked $mod+backspace exec mpc toggle
 
   --release --locked $mod+bracketleft exec mpc prev
   --release --locked $mod+apostrophe exec mpc toggle
@@ -230,7 +230,7 @@ bindsym --to-code {
   $mod+shift+Print exec grimshot copy area
   $mod+Control+Print exec grimshot copy
   #$mod+b exec QT_QPA_PLATFORM=wayland brave --enable-gpu --ignore-gpu-blocklist --enable-gpu-rasterization --password-store=basic --enable-zero-copy --enable-native-gpu-memory-buffers --disable-experimental-web-platform-features --enable-unsafe-webgpu --use-cmd-decoder=passthrough --enable-gpu-compositing
-  $mod+b exec MOZ_ENABLE_WAYLAND=1 firefox
+  $mod+v exec MOZ_ENABLE_WAYLAND=1 firefox
   #$mod+b exec qutebrowser
   }
   #popup_during_fullscreen smart
@@ -270,7 +270,7 @@ bindsym --to-code {
   [title="Media viewer"] floating enable; fullscreen disable
   [title="rsmixer"] floating enable
   [title="Choose Files"] floating enable
-  [title="floatingTerminal"] floating enable; resize set 98ppt 60ppt; move position 1ppt 0;mark term;  move scratchpad
+  [title="floatingTerminal"] floating enable; resize set 90ppt 30ppt; move position 1ppt 1ppt; mark term; move scratchpad
   [class="Firefox" app_id="firefox" app_id="org.qutebrowser.qutebrowser"] inhibit_idle fullscreen
 }
 
@@ -280,14 +280,13 @@ exec dbus-update-activation-environment --all
 exec ~/.config/sway/autostart.sh
 
 exec swayidle -w \
-  timeout 1200 'pgrep -x swaylock || ~/.config/sway/lock.sh' \
-  timeout 1210 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \
+  timeout 1200 '~/.config/sway/lock.sh' \
   resume 'swaymsg "output * power on"' \
   before-sleep '~/.config/sway/lock.sh' \
-  lock '~/.config/sway/lock.sh'
+  lock 'pgrep -x swaylock || swaylock -k -c 101010'
 
 exec_always {
 ##These always run when you reload sway
   xset r 66
-  killall waybar;waybar
+  killall waybar;GTK_THEME=adw-gtk3-dark waybar
 }

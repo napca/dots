@@ -1,7 +1,25 @@
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
-
+workspace "term"
+workspace "browser"
+workspace "chat"
+window-rule {
+  match app-id="Alacritty"
+  open-on-workspace "term"
+  open-fullscreen true
+}
+window-rule {
+  match app-id="org.qutebrowser.qutebrowser"
+  open-on-workspace "browser"
+  open-maximized true
+}
+window-rule {
+  match app-id=r#"org\.telegram\.desktop|nheko"#
+  open-on-workspace "chat"
+}
 input {
+    focus-follows-mouse
+    warp-mouse-to-focus
     keyboard {
         xkb {
             // You can set rules, model, layout, variant and options.
@@ -26,12 +44,15 @@ input {
     // Next sections include libinput settings.
     // Omitting settings disables them, or leaves them at their default values.
     touchpad {
-        tap
-        // dwt
-        natural-scroll
-        // accel-speed 0.2
+        dwt
+        dwtp
+        accel-speed 0.3
         // accel-profile "flat"
         // tap-button-map "left-middle-right"
+    }
+    trackpoint {
+        accel-speed 0.0
+        accel-profile "adaptive"
     }
 
     mouse {
@@ -74,6 +95,7 @@ input {
     mode "1920x1080@144"
 
     // Position of the output in the global coordinate space.
+
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
     // The cursor can only move between directly adjacent outputs.
     // Output scale has to be taken into account for positioning:
@@ -92,7 +114,8 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 3
+
 
         // Color of the ring on the active monitor: red, green, blue, alpha.
         active-color 127 200 255 255
@@ -157,8 +180,9 @@ layout {
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
- spawn-at-startup "xfce4-terminal" "-e" "starttmux"
- spawn-at-startup "swaybg" "-i" "/home/napca/.config/sway/wall.png" "-m" "fill"
+ spawn-at-startup "alacritty" "-e" "starttmux"
+ spawn-at-startup "xwayland-satellite" ":0"
+ spawn-at-startup "swaybg" "-i" "/home/napca/.config/sway/wall16.jpg" "-m" "fill"
  spawn-at-startup "/home/napca/.config/niri/autostart.sh"
 
 cursor {
@@ -200,26 +224,40 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return { spawn "xfce4-terminal" "-e" "starttmux"; }
-    Mod+W { spawn "rofi" "-show" "drun" "-show-icons"; }
-    Mod+Alt+L { spawn "swaylock"; }
+    Mod+Return { spawn "alacritty" "-e" "starttmux"; }
+    Mod+W { spawn "rofitoggle" "-show" "drun" "-show-icons" "-hover-select" "-me-select-entry" "MouseSecondary" "-me-accept-entry" "MousePrimary"; }
+    Mod+Tab { spawn "rofitoggle" "-show" "window" "-show-icons" "-hover-select" "-me-select-entry" "MouseSecondary" "-me-accept-entry" "MousePrimary" "-theme" "gruvbox-dark"; }
+    Mod+Z { spawn "loginctl" "lock-session"; }
+    Mod+Shift+Z { spawn "sh" "-c" "systemctl suspend"; }
 
     // You can also use a shell:
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
-    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    //XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    //XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioRaiseVolume cooldown-ms=100 { spawn "swayosd-client" "--output-volume" "5";}
+    XF86AudioLowerVolume cooldown-ms=100 { spawn "swayosd-client" "--output-volume" "-5";}
+    XF86AudioMute cooldown-ms=100 { spawn "swayosd-client" "--output-volume" "mute-toggle";}
+    XF86MonBrightnessUp { spawn "swayosd-client" "--brightness" "raise";}
+    XF86MonBrightnessDown { spawn "swayosd-client" "--brightness" "lower";}
 
     Mod+Q { close-window; }
-
+    Mod+TouchpadScrollDown cooldown-ms=200 { focus-workspace-down; }
+    Mod+TouchpadScrollUp   cooldown-ms=200 { focus-workspace-up; }
+    Mod+TouchpadScrollRight cooldown-ms=200 { focus-column-right; }
+    Mod+TouchpadScrollLeft  cooldown-ms=200 { focus-column-left; }
+    Mod+WheelScrollDown cooldown-ms=200 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=200 { focus-workspace-up; }
+    Mod+WheelScrollRight cooldown-ms=200 { focus-column-right; }
+    Mod+WheelScrollLeft cooldown-ms=200 { focus-column-left; }
     Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-window-or-workspace-down; }
+    Mod+Up    { focus-window-or-workspace-up; }
     Mod+Right { focus-column-right; }
     Mod+N     { focus-column-left; }
-    Mod+E     { focus-window-down; }
-    Mod+O     { focus-window-up; }
+    Mod+E     { focus-window-or-workspace-down; }
+    Mod+O     { focus-window-or-workspace-up; }
     Mod+I     { focus-column-right; }
     Alt+Shift+Tab     { focus-column-left; }
     Alt+Tab     { focus-column-right; }
@@ -229,14 +267,14 @@ binds {
     Mod+Shift+Up    { move-window-up; }
     Mod+Shift+Right { move-column-right; }
     Mod+Shift+N     { move-column-left; }
-    Mod+Shift+E     { move-window-down; }
-    Mod+Shift+O     { move-window-up; }
+    Mod+Shift+E     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+O     { move-window-up-or-to-workspace-up; }
     Mod+Shift+I     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
-    // Mod+J     { focus-window-or-workspace-down; }
-    // Mod+K     { focus-window-or-workspace-up; }
+    // Mod+J     { focus-window-or-workspace-or-workspace-down; }
+    // Mod+K     { focus-window-or-workspace-or-workspace-up; }
     // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
     // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
@@ -280,10 +318,10 @@ binds {
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+P         { move-workspace-up; }
+    Mod+Ctrl+Page_Down { move-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+U         { move-workspace-down; }
+    Mod+Ctrl+P         { move-workspace-up; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -294,15 +332,15 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -310,7 +348,7 @@ binds {
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
 
-    Mod+Shift+W { switch-preset-column-width; }
+    Mod+R { switch-preset-column-width; }
     Mod+T { maximize-column; }
     Mod+Shift+T { fullscreen-window; }
     Mod+M { center-column; }
@@ -327,6 +365,7 @@ binds {
     Mod+Ctrl+N { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
     Mod+Ctrl+I { set-column-width "+10%"; }
+    Mod+0 { reset-window-height; }
 
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
@@ -343,6 +382,7 @@ binds {
      Mod+Shift+Space { switch-layout "prev"; }
 
     Print { screenshot; }
+
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
@@ -360,9 +400,31 @@ binds {
     Mod+Shift+apostrophe    { spawn "playerctl" "play-pause"; }
     Mod+Shift+bracketright  { spawn "playerctl" "next"; } 
     Mod+K             { spawn "swaync-client" "-t" "-sw";}
-    Mod+V             { spawn "firefox";}
+    Mod+V             { spawn "qutebrowser";}
 }
 
+environment {
+    MOZ_ENABLE_WAYLAND "1"
+    BEMENU_BACKEND "wayland"
+    CLUTTER_BACKEND "wayland"
+    ECORE_EVAS_ENGINE "wayland_egl"
+    ELM_ENGINE "wayland_egl"
+    GDK_BACKEND "wayland"
+    QT_AUTO_SCREEN_SCALE_FACTOR "0"
+    QT_QPA_PLATFORM "wayland"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    SAL_USE_VCLPLUGIN "gtk3"
+    SDL_VIDEODRIVER "wayland"
+    _JAVA_AWT_WM_NONREPARENTING "1"
+    QT_QPA_PLATFORMTHEME "qt5ct"
+    XDG_CURRENT_DESKTOP "Sway"
+    XDG_SESSION_TYPE "wayland"
+}
+window-rule {
+    clip-to-geometry true
+    geometry-corner-radius 12
+}
+prefer-no-csd
 // Settings for debugging. Not meant for normal use.
 // These can change or stop working at any point with little notice.
 debug {

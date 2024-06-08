@@ -14,6 +14,7 @@ settings:
       nov: set content.proxy system
       q: close
       qa: quit
+      tor: set content.proxy socks://localhost:9050/
       v: set content.proxy socks://localhost:2080/
       w: session-save
       wq: quit --save
@@ -159,8 +160,11 @@ settings:
         jt: hint links yank
         k: search-next
         l: quickmark-save
+        m: null
         mh: download-clear
+        mo: tab-only --next
         mp: tab-only
+        mw: tab-only --prev
         n: scroll left
         o: scroll up
         p: cmd-set-text -s :open
@@ -170,7 +174,6 @@ settings:
         st: save
         t: hint
         u: mode-enter insert
-        v: cmd-set-text -s :quickmark-load
         w: reload
         xP: cmd-set-text :open -b -r {url:pretty}
         xp: cmd-set-text -s :open -b
@@ -421,6 +424,7 @@ settings:
   content.media.audio_video_capture:
     https://cstimer.net: true
     https://discord.com: true
+    https://meet.google.com: true
   content.media.video_capture:
     https://cstimer.net: true
     https://discord.com: true
@@ -439,6 +443,7 @@ settings:
     https://recorder.easeus.com: false
     https://rubik.ir: false
     https://soft98.ir: false
+    https://torob.com: false
     https://www.auslogics.com: false
     https://www.digikala.com: false
     https://www.duolingo.com: true
@@ -456,12 +461,16 @@ settings:
   content.user_stylesheets:
     global: null
   fonts.default_family:
-    global: NovaRound
+    global: FiraSans
+  fonts.default_size:
+    global: 12pt
   fonts.hints:
     global: bold 12pt default_family
   fonts.keyhint:
     global: default_size default_family
   fonts.messages.error:
+    global: default_size default_family
+  fonts.statusbar:
     global: default_size default_family
   fonts.web.family.cursive:
     global: null
@@ -475,6 +484,12 @@ settings:
     global: null
   fonts.web.family.standard:
     global: null
+  fonts.web.size.default:
+    global: 16
+  fonts.web.size.minimum:
+    global: 15
+  fonts.web.size.minimum_logical:
+    global: 6
   hints.border:
     global: '1px solid #ebcb8b'
   hints.chars:
@@ -499,3 +514,5 @@ settings:
       DEFAULT: https://google.com/search?q={}
   url.start_pages:
     global: http://127.0.0.1:8888
+  zoom.default:
+    global: 120%

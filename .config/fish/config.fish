@@ -59,8 +59,8 @@ alias xi 'sudo xbps-install'
 alias xu 'sudo xbps-install -Su'
 alias xq 'sudo xbps-query -Rs'
 alias xr 'sudo xbps-remove'
-alias proton 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/proton ~/.steam/steam/steamapps/common/Proton\ 8.0/proton run'
-alias proton7 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/proton7 ~/.steam/steam/steamapps/common/Proton\ 7.0/proton run'
+alias proton 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/proton ~/.steam/steam/steamapps/common/Proton\ 9.0\ \(Beta\)/proton run'
+alias protonexp 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonexp ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton run'
 alias protonge 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonge /usr/share/steam/compatibilitytools.d/proton-ge-custom/proton run'
 alias protonge32 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonge32 WINEARCH=win32 /usr/share/steam/compatibilitytools.d/proton-ge-custom/proton run'
 #wgu() {
@@ -71,7 +71,7 @@ alias protonge32 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Ste
 #}
 alias a2c 'aria2c -d ~/dl -x 16 -s 16 --auto-file-renaming=false'
 alias music 'tmux new-session -s $fish_pid "tmux source-file ~/.config/ncmpcpp/tsession"'
-alias datefa "curl https://www.time.ir/fa/today 2> /dev/null | grep 'ShamsiNumeral' | grep -o '>.*<'| sed 's/[<,>]//g'"
+alias datefa "curl https://www.time.ir/fa/today 2> /dev/null | grep 'ShamsiNumeral' | grep -o '>.*<'| sed 's/[<,>]//g; y/۰۱۲۳۴۵۶۷۸۹/0123456789/'"
 source ~/.config/fish/profile > /dev/null
 alias mpv 'mpv --screenshot-format=png --screenshot-directory=~/pic/Screenshots/'
 #wal -Rneq &

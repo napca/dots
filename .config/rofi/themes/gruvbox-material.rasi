@@ -42,8 +42,8 @@ window {
     location: center;
     anchor:   center;
     border-radius: 10px;
-    height: 530px;
-    width: 950px;
+    height: 70%;
+    width: 80%;
     dynamic: true;
 
     background-color: @transparent;
@@ -85,13 +85,16 @@ prompt {
 }
 
 listview {
+    layout: vertical;
     padding: 8px;
     border-radius: 0px 0px 10px 10px;
     border: 2px 2px 2px 2px;
     border-color: @gruv0;
     background-color: @gruv0;
     dynamic: true;
-    columns:  4;
+    cycle: true;
+    columns:  8;
+    fixed-columns:               false;
 }
 
 element {
@@ -101,6 +104,7 @@ element {
     color: @foreground;
     text-color: @gruv6;
     background-color: @gruv1;
+    orientation: vertical;
 }
 
 element.normal.active {
@@ -128,13 +132,18 @@ element.alternate.normal {
     background-color: @transparent;
 }
 
-element-text, element-icon {
-    size: 3ch;
+element-icon {
+    size: 64px;
     margin: 0 10 0 0;
     vertical-align: 0.5;
     background-color: inherit;
     text-color: @gruv6;
     dynamic: true;
+}
+element-text {
+    text-color: @gruv6;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }
 
 button {

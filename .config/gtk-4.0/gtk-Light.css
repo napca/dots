@@ -1202,16 +1202,14 @@ button.osd {
 
 
 button.osd.image-button {
-  padding: 0;
-  min-height: 42px;
-  min-width: 42px;
+  padding: 3px;
+  min-height: 28px;
+  min-width: 28px;
 }
 
 
-button.osd.image-button {
+button.osd.image-button.remove-button {
   padding: 0;
-  min-height: 28px;
-  min-width: 28px;
 }
 
 
@@ -5052,6 +5050,10 @@ window.background.messagedialog .response-area button.suggested-action, window.b
   border-radius: 6px;
 }
 
+window.background.messagedialog .response-area separator {
+  background-color: transparent;
+}
+
 window.aboutdialog image.large-icons {
   -gtk-icon-size: 128px;
 }
@@ -5962,7 +5964,6 @@ statusbar {
   min-height: 24px;
   min-width: 24px;
   padding: 0;
-  -gtk-icon-shadow: none;
 }
 
 #NautilusViewCell clamp box {
@@ -6864,10 +6865,6 @@ scrolledwindow.fake-adw-status-page > viewport > box > clamp > box > .title:not(
   margin-bottom: 12px;
 }
 
-statuspage.icon-dropshadow image.icon {
-  -gtk-icon-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 -1px rgba(0, 0, 0, 0.05), 1px 0 rgba(0, 0, 0, 0.1), 0 1px rgba(0, 0, 0, 0.3), -1px 0 rgba(0, 0, 0, 0.1);
-}
-
 window.info scrollbar.vertical {
   margin-top: 48px;
   background: none;
@@ -7086,10 +7083,12 @@ statuspage.compact > scrolledwindow > viewport > box > clamp > box > .title {
 toast {
   margin: 12px;
   margin-bottom: 18px;
-  border-radius: 12px;
+  border-radius: 9999px;
   border-spacing: 6px;
   padding: 6px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.12);
+  outline: 1px solid rgba(255, 255, 255, 0.15);
+  outline-offset: -1px;
 }
 
 toast:dir(ltr) {
@@ -7523,12 +7522,12 @@ toolbarview.undershoot-bottom scrolledwindow > undershoot.bottom {
 }
 
 .sidebar-pane banner > revealer > widget {
-  background-color: gtkmix(#0860F2, rgba(240, 240, 240, 0.96), 30%);
+  background-color: mix(#0860F2,rgba(240, 240, 240, 0.96),0.7);
   color: #363636;
 }
 
 .sidebar-pane banner > revealer > widget:backdrop {
-  background-color: gtkmix(#0860F2, rgba(240, 240, 240, 0.96), 30%);
+  background-color: mix(#0860F2,rgba(240, 240, 240, 0.96),0.7);
 }
 
 .sidebar-pane:dir(ltr), .sidebar-pane:dir(ltr) banner > revealer > widget, .sidebar-pane.end:dir(rtl), .sidebar-pane.end:dir(rtl) banner > revealer > widget {
@@ -7681,13 +7680,13 @@ toolbarview.undershoot-bottom scrolledwindow > undershoot.bottom {
 
 .content-pane .sidebar-pane banner > revealer > widget,
 .sidebar-pane .content-pane banner > revealer > widget {
-  background-color: gtkmix(#0860F2, #ffffff, 30%);
+  background-color: mix(#0860F2,#ffffff,0.7);
   color: #363636;
 }
 
 .content-pane .sidebar-pane banner > revealer > widget:backdrop,
 .sidebar-pane .content-pane banner > revealer > widget:backdrop {
-  background-color: gtkmix(#0860F2, #ffffff, 30%);
+  background-color: mix(#0860F2,#ffffff,0.7);
 }
 
 .content-pane .sidebar-pane:dir(ltr), .content-pane .sidebar-pane:dir(ltr) banner > revealer > widget, .content-pane .sidebar-pane.end:dir(rtl), .content-pane .sidebar-pane.end:dir(rtl) banner > revealer > widget,

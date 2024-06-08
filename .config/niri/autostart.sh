@@ -13,3 +13,11 @@ gsettings set org.gnome.desktop.interface cursor-theme 'Vimix Cursors - White' &
 gsettings set org.gnome.desktop.interface font-name 'JetBrains Nerd Font Mono 11' &
 import-gsettings &
 /lib/kdeconnectd &
+swayosd-server --top-margin=0.05 &
+swayidle -w \
+  timeout 1200 'pgrep -x swaylock || ~/.config/sway/lock.sh &' \
+  timeout 1210 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \
+  resume 'swaymsg "output * power on"' \
+  before-sleep '~/.config/sway/lock.sh &' \
+  lock '~/.config/sway/lock.sh &' &
+

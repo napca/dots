@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 /lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 swaync &
-(sleep 0.6;waybar) &
+(sleep 0.6;GTK_THEME=adw-gtk3-dark waybar) &
 pipewire &
 pipewire-pulse &
 #pulseaudio &
