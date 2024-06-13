@@ -162,6 +162,8 @@ settings:
         l: quickmark-save
         m: null
         mh: download-clear
+        mi: tab-only --prev
+        mn: tab-only --next
         mo: tab-only --next
         mp: tab-only
         mw: tab-only --prev
@@ -169,6 +171,7 @@ settings:
         o: scroll up
         p: cmd-set-text -s :open
         se: cmd-set-text -s :bind
+        sh: config-cycle colors.webpage.darkmode.enabled
         so: cmd-set-text -s :set -t
         ss: cmd-set-text -s :set
         st: save
@@ -391,11 +394,15 @@ settings:
   colors.webpage.darkmode.algorithm:
     global: lightness-cielab
   colors.webpage.darkmode.contrast:
-    global: 0.0
+    global: 1.0
   colors.webpage.darkmode.enabled:
     global: false
   colors.webpage.darkmode.policy.images:
     global: never
+  colors.webpage.darkmode.threshold.background:
+    global: 200
+  colors.webpage.darkmode.threshold.foreground:
+    global: 256
   colors.webpage.preferred_color_scheme:
     global: auto
   content.blocking.enabled:

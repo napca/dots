@@ -18,7 +18,6 @@ window-rule {
   open-on-workspace "chat"
 }
 input {
-    focus-follows-mouse
     warp-mouse-to-focus
     keyboard {
         xkb {
@@ -51,7 +50,7 @@ input {
         // tap-button-map "left-middle-right"
     }
     trackpoint {
-        accel-speed 0.0
+        accel-speed -0.1
         accel-profile "adaptive"
     }
 
@@ -114,7 +113,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 3
+        width 4
 
 
         // Color of the ring on the active monitor: red, green, blue, alpha.
@@ -182,7 +181,8 @@ layout {
 // which may be more convenient to use.
  spawn-at-startup "alacritty" "-e" "starttmux"
  spawn-at-startup "xwayland-satellite" ":0"
- spawn-at-startup "swaybg" "-i" "/home/napca/.config/sway/wall16.jpg" "-m" "fill"
+ spawn-at-startup "swaybg" "-o" "eDP-1" "-i" "/home/napca/.config/sway/wall16.jpg" "-m" "fill" 
+ spawn-at-startup "swaybg" "-o" "LVDS-1" "-i" "/home/napca/.config/sway/wall4.jpg" "-m" "fill" 
  spawn-at-startup "/home/napca/.config/niri/autostart.sh"
 
 cursor {
@@ -236,11 +236,11 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     //XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     //XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    XF86AudioRaiseVolume cooldown-ms=100 { spawn "swayosd-client" "--output-volume" "5";}
-    XF86AudioLowerVolume cooldown-ms=100 { spawn "swayosd-client" "--output-volume" "-5";}
-    XF86AudioMute cooldown-ms=100 { spawn "swayosd-client" "--output-volume" "mute-toggle";}
-    XF86MonBrightnessUp { spawn "swayosd-client" "--brightness" "raise";}
-    XF86MonBrightnessDown { spawn "swayosd-client" "--brightness" "lower";}
+    XF86AudioRaiseVolume cooldown-ms=100 allow-when-locked=true { spawn "swayosd-client" "--output-volume" "5";}
+    XF86AudioLowerVolume cooldown-ms=100 allow-when-locked=true { spawn "swayosd-client" "--output-volume" "-5";}
+    XF86AudioMute cooldown-ms=100 allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle";}
+    XF86MonBrightnessUp allow-when-locked=true { spawn "swayosd-client" "--brightness" "raise";}
+    XF86MonBrightnessDown allow-when-locked=true { spawn "swayosd-client" "--brightness" "lower";}
 
     Mod+Q { close-window; }
     Mod+TouchpadScrollDown cooldown-ms=200 { focus-workspace-down; }
@@ -391,14 +391,14 @@ binds {
 
 //    Mod+Shift+Ctrl+T { toggle-debug-tint; }
 // custom bindings
-    Mod+bracketleft   { spawn "mpc" "prev"; } 
-    Mod+backspace     { spawn "mpc" "toggle"; } 
-    Mod+apostrophe    { spawn "mpc" "toggle"; }
-    Mod+bracketright  { spawn "mpc" "next"; } 
-    Mod+Shift+bracketleft   { spawn "playerctl" "prev"; } 
-    Mod+Shift+backspace     { spawn "playerctl" "play-pause"; } 
-    Mod+Shift+apostrophe    { spawn "playerctl" "play-pause"; }
-    Mod+Shift+bracketright  { spawn "playerctl" "next"; } 
+    Mod+bracketleft allow-when-locked=true  { spawn "mpc" "prev"; } 
+    Mod+backspace   allow-when-locked=true { spawn "mpc" "toggle"; } 
+    Mod+apostrophe  allow-when-locked=true { spawn "mpc" "toggle"; }
+    Mod+bracketright allow-when-locked=true { spawn "mpc" "next"; } 
+    Mod+Shift+bracketleft allow-when-locked=true  { spawn "playerctl" "prev"; } 
+    Mod+Shift+backspace   allow-when-locked=true  { spawn "playerctl" "play-pause"; } 
+    Mod+Shift+apostrophe  allow-when-locked=true  { spawn "playerctl" "play-pause"; }
+    Mod+Shift+bracketright allow-when-locked=true { spawn "playerctl" "next"; } 
     Mod+K             { spawn "swaync-client" "-t" "-sw";}
     Mod+V             { spawn "qutebrowser";}
 }
@@ -419,6 +419,7 @@ environment {
     QT_QPA_PLATFORMTHEME "qt5ct"
     XDG_CURRENT_DESKTOP "Sway"
     XDG_SESSION_TYPE "wayland"
+    DISPLAY ":0"
 }
 window-rule {
     clip-to-geometry true

@@ -1,8 +1,8 @@
 {
     "layer": "top",
     "spacing": 0,
-    "modules-left": ["wlr/taskbar","sway/workspaces", "sway/scratchpad", "mpd"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["wlr/taskbar","custom/workspaces", "custom/wlsunset", "sway/scratchpad", "mpd"],
+    "modules-center": ["custom/window"],
     "modules-right": ["tray", "pulseaudio", "backlight", "sway/language", "battery", "network", "clock", "custom/power"],
     "custom/void-linux": {
         "format": ""
@@ -22,6 +22,22 @@
   "sway/language": {
     "format": "{flag} {short} 󰌌"
   },
+	"custom/wlsunset":{
+    "format": "󰈋",
+    "on-click-right": "bash ~/.config/waybar/scripts/sunONOFF",
+   	"on-scroll-up": "bash ~/.config/waybar/scripts/red_dec",
+   	"on-scroll-down": "bash ~/.config/waybar/scripts/red_inc",
+  },
+  "custom/workspaces": {
+    "exec": "$HOME/.config/waybar/scripts/workspaces.nu \"$WAYBAR_OUTPUT_NAME\"",
+    },
+    "custom/window": {
+        "return-type": "json",
+        "max-length": 40,
+        "escape": true,
+        "exec": "$HOME/.config/waybar/scripts/window.nu",
+        "format": "<i>{}</i>"
+    },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
                 "format-disconnected": "Disconnected",
@@ -90,7 +106,9 @@
     "backlight": {
          "device": "acpi_video0",
         "format": "{percent}% {icon} ",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +1%",
+        "on-scroll-down": "brightnessctl set 1%-"
     },
     "battery": {
         "states": {

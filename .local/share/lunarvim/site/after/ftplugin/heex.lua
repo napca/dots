@@ -1,2 +1,2 @@
-require("lvim.lsp.manager").setup("elixirls")
 require("lvim.lsp.manager").setup("tailwindcss")
+require("lvim.lsp.manager").setup("elixirls")

@@ -11,7 +11,6 @@ window#waybar {
 #taskbar {
     /* margin-left: 4px; */
     padding: 2px 0px;
-    padding-right: 2px;
 }
 
 #taskbar button {
@@ -45,9 +44,15 @@ window#waybar {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-#workspaces {
+#workspaces,
+#custom-wlsunset {
     padding: 2px 2px;
 
+}
+
+#custom-workspaces {
+    padding: 2px;
+    padding-right: 4px;
 }
 
 #workspaces button {
@@ -146,7 +151,8 @@ window#waybar {
     margin-bottom: 0px;
 }
 
-#window {
+#window,
+#custom-window {
     background-color: #3c3836;
     border-radius: 8px;
     padding-left: 5px;
