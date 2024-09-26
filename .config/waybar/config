@@ -86,8 +86,8 @@
     },
     "tray": {
         "reverse-direction": true,
-        "icon-size": 11,
-        "spacing": 5 
+        "icon-size": 13,
+        "spacing": 3 
     },
     "clock": {
         "tooltip-format": "{:%A %B %d %Y | %H:%M}",

@@ -3,11 +3,13 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 alias ssway "MOZ_ENABLE_WAYLAND=1 BEMENU_BACKEND='wayland' CLUTTER_BACKEND='wayland' ECORE_EVAS_ENGINE='wayland_egl' ELM_ENGINE='wayland_egl' QT_QPA_PLATFORM='wayland-egl' QT_WAYLAND_DISABLE_WINDOWDECORATION=1 SAL_USE_VCLPLUGIN='gtk3' SDL_VIDEODRIVER='wayland' _JAVA_AWT_WM_NONREPARENTING=1 QT_QPA_PLATFORMTHEME=qt5ct XDG_CURRENT_DESKTOP=Sway XDG_SESSION_TYPE=wayland dbus-run-session sway 2>/tmp/sway.log"
-alias sniri "MOZ_ENABLE_WAYLAND=1 BEMENU_BACKEND='wayland' CLUTTER_BACKEND='wayland' ECORE_EVAS_ENGINE='wayland_egl' ELM_ENGINE='wayland_egl' GDK_BACKEND='wayland' QT_AUTO_SCREEN_SCALE_FACTOR=0 QT_QPA_PLATFORM='wayland' QT_WAYLAND_DISABLE_WINDOWDECORATION=1 SAL_USE_VCLPLUGIN='gtk3' SDL_VIDEODRIVER='wayland' _JAVA_AWT_WM_NONREPARENTING=1 QT_QPA_PLATFORMTHEME=qt5ct XDG_CURRENT_DESKTOP=Sway XDG_SESSION_TYPE=wayland dbus-run-session niri 2>/tmp/niri.log"
 alias m 'ncmpcpp'
 set HISTFILE ~/.fish_history
 set HISTSIZE 10000
 set SAVEHIST 10000
+set VISUAL lvim
+set EDITOR lvim
+set BROWSER qutebrowser
 #alias tmux "tmux attach -t default || tmux new -s default"
 #    [ -z "$TMUX" ] && command -v tmux > /dev/null && exec tmux -f ~/.tmux.conf
 #    set TERM screen-256color
@@ -78,7 +80,4 @@ alias mpv 'mpv --screenshot-format=png --screenshot-directory=~/pic/Screenshots/
 alias zzz 'swaylock -c 000000 & sudo /usr/bin/zzz'
 alias ZZZ 'swaylock -c 000000 & sudo /usr/bin/ZZZ'
 alias lock 'swaylock -c 000000'
-if test (tty) = "/dev/tty1"
-  ssway
-  # dbus-run-session sway
-end
+set PATH $PATH:/home/napca/.config/emacs/bin

@@ -8,6 +8,10 @@ window#waybar {
     background-color: transparent;
 }
 
+#tray {
+    padding-right: 5px;
+}
+
 #taskbar {
     /* margin-left: 4px; */
     padding: 2px 0px;
@@ -79,8 +83,7 @@ window#waybar {
 #backlight,
 #network,
 #pulseaudio,
-#languge,
-#tray {
+#languge {
     padding: 0px 2px;
     background-color: transparent;
 }

@@ -18,6 +18,7 @@ map u recolor
 # map p :open
 map k search forward
 map K search backward
+set database sqlite
 set scroll-full-overlap 0.03
 set statusbar-page-percent true
 set statusbar-home-tilde true

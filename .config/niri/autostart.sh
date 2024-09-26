@@ -24,7 +24,7 @@ sleep 1
 #QT_QPA_PLATFORMTHEME=gtk3 telegram-desktop) &
 gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark-solid' &
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' &
-gsettings set org.gnome.desktop.interface cursor-theme 'Vimix Cursors - White' &
+gsettings set org.gnome.desktop.interface cursor-theme 'Vimix-white-cursors' &
 gsettings set org.gnome.desktop.interface font-name 'JetBrains Nerd Font Mono 11' &
 import-gsettings &
 /lib/kdeconnectd &
@@ -33,5 +33,5 @@ swayidle -w \
     timeout 1200 'pgrep -x swaylock || ~/.config/sway/lock.sh &' \
     timeout 1210 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \
     resume 'swaymsg "output * power on"' \
-    before-sleep 'loginctl lock-session' \
-    lock 'niri msg action do-screen-transition; ~/.config/sway/lock.sh &' &
+    before-sleep 'niri msg action do-screen-transition & ~/.config/sway/lock.sh ; sleep 0.9' \
+    lock 'niri msg action do-screen-transition; ~/.config/sway/lock.sh ' &

@@ -177,6 +177,7 @@ settings:
         st: save
         t: hint
         u: mode-enter insert
+        v: cmd-set-text -s :tab-select
         w: reload
         xP: cmd-set-text :open -b -r {url:pretty}
         xp: cmd-set-text -s :open -b
@@ -199,198 +200,186 @@ settings:
         n: prompt-accept no
         y: prompt-accept yes
   colors.completion.category.bg:
-    global: '#3b4252'
+    global: '#3c3836'
   colors.completion.category.border.bottom:
-    global: '#2e3440'
+    global: '#3c3836'
   colors.completion.category.border.top:
-    global: '#2e3440'
+    global: '#3c3836'
   colors.completion.category.fg:
-    global: '#ECEFF4'
+    global: '#83a598'
   colors.completion.even.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.completion.fg:
     global:
-    - '#ECEFF4'
-    - '#ECEFF4'
-    - '#ECEFF4'
+    - '#ebdbb2'
+    - '#8ec07c'
+    - '#fabd2f'
   colors.completion.item.selected.bg:
-    global: '#e8c000'
+    global: '#7c6f64'
   colors.completion.item.selected.border.bottom:
-    global: '#bbbb00'
+    global: '#504945'
   colors.completion.item.selected.border.top:
-    global: '#bbbb00'
+    global: '#504945'
   colors.completion.item.selected.fg:
-    global: '#2e3440'
+    global: '#fbf1c7'
   colors.completion.item.selected.match.fg:
-    global: '#ff4444'
+    global: '#fe8019'
   colors.completion.match.fg:
-    global: '#ff4444'
+    global: '#fe8019'
   colors.completion.odd.bg:
-    global: '#4c566a'
+    global: '#282828'
   colors.completion.scrollbar.bg:
-    global: '#333333'
+    global: '#3c3836'
   colors.completion.scrollbar.fg:
-    global: '#ECEFF4'
+    global: '#fbf1c7'
   colors.contextmenu.disabled.bg:
-    global: null
+    global: '#665c54'
   colors.contextmenu.disabled.fg:
-    global: null
+    global: '#bdae93'
   colors.contextmenu.menu.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.contextmenu.menu.fg:
-    global: null
+    global: '#d5c4a1'
   colors.contextmenu.selected.bg:
-    global: '#4c566a'
+    global: '#504945'
   colors.contextmenu.selected.fg:
-    global: null
+    global: '#d5c4a1'
   colors.downloads.bar.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.downloads.error.bg:
     global: '#bf616a'
   colors.downloads.error.fg:
-    global: '#ECEFF4'
+    global: '#fb4934'
   colors.downloads.start.bg:
-    global: '#0000aa'
+    global: '#83a598'
   colors.downloads.start.fg:
-    global: '#ECEFF4'
+    global: '#1d2021'
   colors.downloads.stop.bg:
-    global: '#00aa00'
+    global: '#8ec07c'
   colors.downloads.stop.fg:
-    global: '#ECEFF4'
-  colors.downloads.system.bg:
-    global: rgb
-  colors.downloads.system.fg:
-    global: rgb
-  colors.hints.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.hints.fg:
-    global: '#ECEFF4'
+    global: '#1d2021'
   colors.hints.match.fg:
-    global: '#a3be8c'
+    global: '#7c6f64'
   colors.keyhint.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.keyhint.fg:
-    global: '#ECEFF4'
+    global: '#a89984'
   colors.keyhint.suffix.fg:
-    global: '#000000'
+    global: '#fbf1c7'
   colors.messages.error.bg:
-    global: '#bf616a'
+    global: '#fb4934'
   colors.messages.error.border:
-    global: '#bb0000'
+    global: '#fb4934'
   colors.messages.error.fg:
-    global: '#ECEFF4'
+    global: '#1d2021'
   colors.messages.info.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.messages.info.border:
-    global: '#333333'
+    global: '#1d2021'
   colors.messages.info.fg:
-    global: '#ECEFF4'
+    global: '#d5c4a1'
   colors.messages.warning.bg:
-    global: '#208770'
+    global: '#d3869b'
   colors.messages.warning.border:
-    global: '#d47300'
+    global: '#d3869b'
   colors.messages.warning.fg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.prompts.bg:
-    global: '#444444'
-  colors.prompts.border:
-    global: 1px solid gray
+    global: '#665c54'
   colors.prompts.fg:
-    global: '#ECEFF4'
+    global: '#d5c4a1'
   colors.prompts.selected.bg:
-    global: grey
+    global: '#504945'
   colors.prompts.selected.fg:
     global: '#ECEFF4'
   colors.statusbar.caret.bg:
-    global: purple
+    global: '#b16286'
   colors.statusbar.caret.fg:
-    global: '#ECEFF4'
+    global: '#1d2021'
   colors.statusbar.caret.selection.bg:
-    global: '#a12dff'
+    global: '#d3869b'
   colors.statusbar.caret.selection.fg:
-    global: '#ECEFF4'
+    global: '#1d2021'
   colors.statusbar.command.bg:
-    global: '#2e3440'
+    global: '#3c3836'
   colors.statusbar.command.fg:
-    global: '#ECEFF4'
+    global: '#bdae93'
   colors.statusbar.command.private.bg:
-    global: '#2e3440'
+    global: '#3c3836'
   colors.statusbar.command.private.fg:
-    global: '#ECEFF4'
+    global: '#d3869b'
   colors.statusbar.insert.bg:
-    global: '#a3be8c'
+    global: '#689d6a'
   colors.statusbar.insert.fg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.statusbar.normal.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.statusbar.normal.fg:
-    global: '#ECEFF4'
+    global: '#d5c4a1'
   colors.statusbar.passthrough.bg:
-    global: '#2e3440'
+    global: '#458588'
   colors.statusbar.passthrough.fg:
-    global: '#5e81ac'
+    global: '#1d2021'
   colors.statusbar.private.bg:
-    global: '#2e3440'
+    global: '#1d2021'
   colors.statusbar.private.fg:
-    global: '#b48ead'
+    global: '#d3869b'
   colors.statusbar.progress.bg:
-    global: '#ECEFF4'
+    global: '#83a598'
   colors.statusbar.url.error.fg:
-    global: '#d08770'
+    global: '#cc241d'
   colors.statusbar.url.fg:
-    global: '#ECEFF4'
+    global: '#a89984'
   colors.statusbar.url.hover.fg:
-    global: '#8FBcBB'
+    global: '#fe8019'
   colors.statusbar.url.success.http.fg:
-    global: '#ECEFF4'
+    global: '#fb4934'
   colors.statusbar.url.success.https.fg:
-    global: '#a3be8c'
+    global: '#fbf1c7'
   colors.statusbar.url.warn.fg:
-    global: '#EBCB8B'
+    global: '#d3869b'
   colors.tabs.bar.bg:
-    global: '#4c566a'
+    global: '#1d2021'
   colors.tabs.even.bg:
-    global: '#2e3440'
+    global: '#504945'
   colors.tabs.even.fg:
-    global: '#ECEFF4'
+    global: '#d5c4a1'
   colors.tabs.indicator.error:
-    global: '#bf616a'
+    global: '#fb4934'
   colors.tabs.indicator.start:
-    global: '#81a1c1'
+    global: '#83a598'
   colors.tabs.indicator.stop:
-    global: '#a3be8c'
-  colors.tabs.indicator.system:
-    global: rgb
+    global: '#8ec07c'
   colors.tabs.odd.bg:
-    global: '#2e3440'
+    global: '#3c3836'
   colors.tabs.odd.fg:
-    global: '#ECEFF4'
+    global: '#d5c4a1'
   colors.tabs.pinned.even.bg:
-    global: '#2e3440'
+    global: '#504945'
   colors.tabs.pinned.even.fg:
-    global: '#a3be8c'
+    global: '#d5c4a1'
   colors.tabs.pinned.odd.bg:
-    global: '#2e3440'
+    global: '#3c3836'
   colors.tabs.pinned.odd.fg:
-    global: '#8fb8bb'
+    global: '#d5c4a1'
   colors.tabs.pinned.selected.even.bg:
-    global: '#4c566a'
+    global: '#a89984'
   colors.tabs.pinned.selected.even.fg:
-    global: '#ECEFF4'
+    global: '#3c3836'
   colors.tabs.pinned.selected.odd.bg:
-    global: '#4c566a'
+    global: '#a89984'
   colors.tabs.pinned.selected.odd.fg:
-    global: '#ECEFF4'
+    global: '#3c3836'
   colors.tabs.selected.even.bg:
-    global: '#4c566a'
+    global: '#a89984'
   colors.tabs.selected.even.fg:
-    global: '#ebcb8b'
+    global: '#3c3836'
   colors.tabs.selected.odd.bg:
-    global: '#4c566a'
+    global: '#a89984'
   colors.tabs.selected.odd.fg:
-    global: '#ebcb8b'
-  colors.webpage.bg:
-    global: white
+    global: '#3c3836'
   colors.webpage.darkmode.algorithm:
     global: lightness-cielab
   colors.webpage.darkmode.contrast:
@@ -405,6 +394,10 @@ settings:
     global: 256
   colors.webpage.preferred_color_scheme:
     global: auto
+  content.autoplay:
+    global: true
+  content.blocking.adblock.lists:
+    global: null
   content.blocking.enabled:
     global: true
   content.blocking.method:
@@ -439,9 +432,11 @@ settings:
   content.notifications.enabled:
     https://1401.tamland.ir: false
     https://app.element.io: true
+    https://bitpin.ir: false
     https://chat.tchncs.de: true
     https://download.ir: false
     https://emalls.ir: false
+    https://hdrezka.pro: false
     https://igg-games.com: false
     https://mail.protonmail.com: true
     https://meet.google.com: true
@@ -464,13 +459,14 @@ settings:
     global: system
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
+    https://mail.proton.me#mailto=%25s: false
     https://mail.protonmail.com?to=%25s: true
   content.user_stylesheets:
     global: null
   fonts.default_family:
     global: FiraSans
   fonts.default_size:
-    global: 12pt
+    global: 10pt
   fonts.hints:
     global: bold 12pt default_family
   fonts.keyhint:
@@ -522,4 +518,4 @@ settings:
   url.start_pages:
     global: http://127.0.0.1:8888
   zoom.default:
-    global: 120%
+    global: 100%

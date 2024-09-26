@@ -6,6 +6,8 @@
 vim.cmd("set wrap linebreak termbidi tabstop=4 shiftwidth=4 expandtab relativenumber")
 vim.cmd("source ~/.config/nvim/workman.vim")
 lvim.plugins = {
+    'Everblush/nvim',
+    name = 'everblush',
     "Mofiqul/adwaita.nvim",
     lazy = false,
     priority = 1000,
@@ -23,6 +25,23 @@ lvim.plugins = {
         vim.cmd('colorscheme gruvbox-material')
         vim.g.lightline = "{'colorscheme' : 'gruvbox-material'}"
     end,
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    "junegunn/limelight.vim",
+    "ray-x/lsp_signature.nvim",
+    "godlygeek/tabular",
+    "preservim/vim-markdown",
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    run = "cd app && npm install",
+    config = function()
+        vim.g.mkdp_auto_start = 1
+    end,
+
+
 }
 lvim.colorscheme = "gruvbox-material"
 -- add `pyright` to `skipped_servers` list
@@ -32,3 +51,8 @@ lvim.colorscheme = "gruvbox-material"
 -- return server ~= "pylsp"
 -- end, lvim.lsp.automatic_configuration.skipped_servers)
 lvim.format_on_save.enabled = true
+require("lvim.lsp.manager").setup("marksman")
+vim.g.mkdp_browser = '/bin/qutebrowser'
+vim.g.mkdp_port = '8569'
+vim.g.mkdp_theme = 'dark'
+vim.g.vim_markdown_folding_disabled = '1'
