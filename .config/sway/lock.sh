@@ -8,5 +8,5 @@ swaync-client -cp
 #done
 #wait
 
- gtklock --idle-hide --idle-timeout 10 -m dpms -m playerctl-module -m powerbar-module -T 4 --art-size 128 -H --show-labels -S -L '/home/napca/.config/sway/prelock.sh' --show-hidden -s ~/.config/gtklock/style.css
+gtklock --idle-hide --idle-timeout 10 -m dpms -m playerctl-module -m powerbar-module -T 4 --art-size 128 -H --show-labels -S -L '/home/napca/.config/sway/prelock.sh' --show-hidden -s ~/.config/gtklock/style.css
 #pgrep -x swaylock || swaylock -k -c 101010

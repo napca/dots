@@ -33,6 +33,13 @@ lvim.plugins = {
     "junegunn/limelight.vim",
     "ray-x/lsp_signature.nvim",
     "godlygeek/tabular",
+    "lervag/vimtex",
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+        -- VimTeX configuration goes here, e.g.
+        vim.g.vimtex_view_method = "zathura"
+    end,
     "preservim/vim-markdown",
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
@@ -52,7 +59,19 @@ lvim.colorscheme = "gruvbox-material"
 -- end, lvim.lsp.automatic_configuration.skipped_servers)
 lvim.format_on_save.enabled = true
 require("lvim.lsp.manager").setup("marksman")
+require("lvim.lsp.manager").setup("qmlls6")
+require("lvim.lsp.manager").setup("vimtex")
+vim.g.vimtex_compiler_latexmk = {
+    executable = 'latexmk',
+    options = {
+        '-xelatex',
+        '-file-line-error',
+        '-synctex=1',
+        '-interaction=nonstopmode',
+    },
+}
 vim.g.mkdp_browser = '/bin/qutebrowser'
 vim.g.mkdp_port = '8569'
 vim.g.mkdp_theme = 'dark'
 vim.g.vim_markdown_folding_disabled = '1'
+require 'lspconfig'.qmlls.setup {}

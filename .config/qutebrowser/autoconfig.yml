@@ -17,6 +17,7 @@ settings:
       tor: set content.proxy socks://localhost:9050/
       v: set content.proxy socks://localhost:2080/
       w: session-save
+      warp: set content.proxy socks://localhost:8086/
       wq: quit --save
       wqa: quit --save
   auto_save.session:
@@ -456,7 +457,7 @@ settings:
   content.pdfjs:
     global: false
   content.proxy:
-    global: system
+    global: socks://localhost:8086/
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
     https://mail.proton.me#mailto=%25s: false

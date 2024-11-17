@@ -47,6 +47,29 @@ friendly-snippets-with-lazy-nvim	friendly-snippets.md	/### With Lazy.nvim
 friendly-snippets-with-packer	friendly-snippets.md	/### With Packer
 friendly-snippets-with-vim-plug	friendly-snippets.md	/### With vim-plug
 lunar.nvim-lunar-nvim	lunar.nvim.md	/# lunar.nvim
+markdown-preview.nvim-about-vim-support	markdown-preview.nvim.md	/### About Vim Support
+markdown-preview.nvim-buy-me-a-coffee	markdown-preview.nvim.md	/### Buy Me A Coffee ☕️
+markdown-preview.nvim-custom-examples	markdown-preview.nvim.md	/### Custom Examples
+markdown-preview.nvim-faq	markdown-preview.nvim.md	/### FAQ
+markdown-preview.nvim-how-can-i-change-the-dark-light-theme	markdown-preview.nvim.md	/#### *How can I change the dark\/light theme?*
+markdown-preview.nvim-how-can-i-pass-cli-options-to-the-browser-like-opening-in-a-new-window	markdown-preview.nvim.md	/#### *How can I pass CLI options to the browser, like opening in a new window?*
+markdown-preview.nvim-installation-usage	markdown-preview.nvim.md	/### Installation & Usage
+markdown-preview.nvim-introduction	markdown-preview.nvim.md	/### Introduction
+markdown-preview.nvim-markdownpreview-config	markdown-preview.nvim.md	/### MarkdownPreview Config:
+markdown-preview.nvim-references	markdown-preview.nvim.md	/### References
+markdown-preview.nvim-why-is-the-synchronised-scrolling-lagging	markdown-preview.nvim.md	/#### *Why is the synchronised scrolling lagging?*
+nvim-configuration	nvim.md	/## Configuration
+nvim-credits	nvim.md	/## Credits
+nvim-installation	nvim.md	/## Installation
+nvim-integrations	nvim.md	/## Integrations
+nvim-lightline-vim-https-github-com-itchyny-lightline-vim	nvim.md	/### \[lightline.vim\](https:\/\/github.com\/itchyny\/lightline.vim)
+nvim-lua	nvim.md	/### Lua
+nvim-lualine-nvim-https-github-com-nvim-lualine-lualine-nvim	nvim.md	/### \[lualine.nvim\](https:\/\/github.com\/nvim-lualine\/lualine.nvim)
+nvim-other-integrations	nvim.md	/### Other integrations
+nvim-preview	nvim.md	/## Preview
+nvim-usage	nvim.md	/## Usage
+nvim-vim-airline-https-github-com-vim-airline-vim-airline	nvim.md	/### \[vim-airline\](https:\/\/github.com\/vim-airline\/vim-airline)
+nvim-vimscript	nvim.md	/### Vimscript
 nvim-web-devicons-contributing	nvim-web-devicons.md	/## Contributing
 nvim-web-devicons-get-all-icons	nvim-web-devicons.md	/### Get all icons
 nvim-web-devicons-get-icon	nvim-web-devicons.md	/### Get Icon

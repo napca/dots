@@ -1,9 +1,9 @@
 {
     "layer": "top",
     "spacing": 0,
-    "modules-left": ["wlr/taskbar","custom/workspaces", "custom/wlsunset", "sway/scratchpad", "mpd"],
+    "modules-left": ["wlr/taskbar","niri/workspaces", "custom/wlsunset", "sway/scratchpad", "mpd"],
     "modules-center": ["custom/window"],
-    "modules-right": ["tray", "pulseaudio", "backlight", "sway/language", "battery", "network", "clock", "custom/power"],
+    "modules-right": ["tray", "pulseaudio", "backlight", "niri/language", "battery", "network", "clock", "custom/power"],
     "custom/void-linux": {
         "format": ""
 	},
@@ -16,11 +16,14 @@
         "on-click-middle": "close",
         "on-click-right": "fullscreen"
     },
+    "niri/workspaces": {
+    "format": "{index}"
+    },
 	"sway/window": {
     "max-length":40,
 	},
-  "sway/language": {
-    "format": "{flag} {short} 󰌌"
+  "niri/language": {
+    "format": "{short} 󰌌"
   },
 	"custom/wlsunset":{
     "format": "󰈋",

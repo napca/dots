@@ -24,7 +24,7 @@ sleep 1
 #QT_QPA_PLATFORMTHEME=gtk3 telegram-desktop) &
 gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark-solid' &
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' &
-gsettings set org.gnome.desktop.interface cursor-theme 'Vimix-white-cursors' &
+gsettings set org.gnome.desktop.interface cursor-theme 'elementary' &
 gsettings set org.gnome.desktop.interface font-name 'JetBrains Nerd Font Mono 11' &
 import-gsettings &
 /lib/kdeconnectd &
