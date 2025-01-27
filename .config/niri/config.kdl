@@ -50,12 +50,12 @@ input {
     touchpad {
         dwt
         dwtp
-        accel-speed 0.0
-        // accel-profile "flat"
+        accel-speed 0.4
+         accel-profile "adaptive"
         // tap-button-map "left-middle-right"
     }
     trackpoint {
-        accel-speed -0.05
+        accel-speed 0.07
         accel-profile "adaptive"
     }
 
@@ -119,14 +119,14 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 3
+        width 1.5
 
 
         // Color of the ring on the active monitor: red, green, blue, alpha.
-        active-color 255 120 155 255
+        active-color 115 140 205 195
 
         // Color of the ring on inactive monitors: red, green, blue, alpha.
-        inactive-color 80 80 80 255
+        inactive-color 80 80 80 0
     }
 
     // You can also add a border. It's similar to the focus ring, but always visible.
@@ -161,7 +161,7 @@ layout {
     // default-column-width {}
 
     // Set gaps around windows in logical pixels.
-    gaps 5
+    gaps 2
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
     // You can think of them as a kind of outer gaps. They are set in logical pixels.
@@ -188,8 +188,10 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
  spawn-at-startup "footclient" "starttmux"
+spawn-at-startup "cosmic-ext-alternative-startup"
+
  spawn-at-startup "xwayland-satellite" ":0"
- spawn-at-startup "swaybg" "-o" "eDP-1" "-i" "/home/napca/.config/sway/wall16.jpg" "-m" "fill" 
+ spawn-at-startup "swaybg" "-o" "eDP-1" "-i" "/home/napca/.config/niri/wall.png" "-m" "fill" 
  spawn-at-startup "swaybg" "-o" "LVDS-1" "-i" "/home/napca/.config/sway/wall4.jpg" "-m" "fill" 
  spawn-at-startup "/home/napca/.config/niri/autostart.sh"
 
@@ -234,10 +236,11 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient" "starttmux"; }
     Mod+W { spawn "rofitoggle" "-show" "drun" "-show-icons"; }
-    Mod+Shift+W { spawn "rofimoji"; }
-    Mod+Tab { spawn "rofitoggle" "-show" "window" "-theme" "gruvbox-material-alttab"; }
+    Mod+Shift+W { spawn "rofimoji" "--use-icons" "--selector-args" "-theme gruvbox-material-emoji -l 8"; }
+    Mod+grave { spawn "rofitoggle" "-show" "window" "-theme" "gruvbox-material-alttab"; }
     Mod+Z { spawn "loginctl" "lock-session"; }
     Mod+Shift+Z { spawn "sh" "-c" "systemctl suspend"; }
+    Mod+Shift+V {spawn  "sh" "-c" "killall waybar || waybar";}
 
     // You can also use a shell:
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
@@ -271,8 +274,11 @@ binds {
     Mod+E     { focus-window-or-workspace-down; }
     Mod+O     { focus-window-or-workspace-up; }
     Mod+I     { focus-column-right; }
-    Alt+Shift+Tab     { focus-column-left; }
-    Alt+Tab     { focus-column-right; }
+    Alt+Tab    {focus-window-down-or-column-right;}
+    Alt+Shift+Tab    {focus-window-up-or-column-left;}
+    Mod+Shift+C       { toggle-window-floating; }
+    Mod+C { switch-focus-between-floating-and-tiling; }
+
 
     Mod+Shift+Left  { move-column-left; }
     Mod+Shift+Down  { move-window-down; }
@@ -282,6 +288,8 @@ binds {
     Mod+Shift+E     { move-window-down-or-to-workspace-down; }
     Mod+Shift+O     { move-window-up-or-to-workspace-up; }
     Mod+Shift+I     { move-column-right; }
+    Mod+G           { swap-window-left;}
+    Mod+Y           { swap-window-right;}
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
@@ -303,6 +311,9 @@ binds {
     Mod+Alt+E     { focus-monitor-down; }
     Mod+Alt+O     { focus-monitor-up; }
     Mod+Alt+I     { focus-monitor-right; }
+    Mod+Tab       { focus-monitor-next;}
+    Mod+Shift+Tab       { move-column-to-monitor-next;}
+    Mod+Ctrl+Tab       { move-workspace-to-monitor-next;}
 
     Mod+Shift+Alt+Left  { move-column-to-monitor-left; }
     Mod+Shift+Alt+Down  { move-column-to-monitor-down; }
@@ -357,8 +368,8 @@ binds {
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
-    Mod+Comma  { consume-window-into-column; }
-    Mod+Period { expel-window-from-column; }
+    Mod+Comma  { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
     Mod+T { maximize-column; }
@@ -373,13 +384,13 @@ binds {
     // * adjust width as a percentage of screen width: "-10%" or "+10%"
     // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
-    Mod+Ctrl+N { set-column-width "-10%"; }
-    Mod+Ctrl+I { set-column-width "+10%"; }
+    Mod+Ctrl+N { set-column-width "-5%"; }
+    Mod+Ctrl+I { set-column-width "+5%"; }
     Mod+0 { reset-window-height; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Ctrl+O { set-window-height "-10%"; }
-    Mod+Ctrl+E { set-window-height "+10%"; }
+    Mod+Ctrl+O { set-window-height "-5%"; }
+    Mod+Ctrl+E { set-window-height "+5%"; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
@@ -400,15 +411,19 @@ binds {
 //    Mod+Shift+Ctrl+T { toggle-debug-tint; }
 // custom bindings
     Mod+bracketleft allow-when-locked=true  { spawn "mpc" "prev"; } 
+    Mod+A allow-when-locked=true  { spawn "mpc" "prev"; } 
     Mod+backspace   allow-when-locked=true { spawn "mpc" "toggle"; } 
     Mod+apostrophe  allow-when-locked=true { spawn "mpc" "toggle"; }
     Mod+bracketright allow-when-locked=true { spawn "mpc" "next"; } 
+    Mod+S allow-when-locked=true { spawn "mpc" "next"; } 
     Mod+Minus allow-when-locked=true { spawn "mpc" "volume" "-10"; }
     Mod+Equal allow-when-locked=true { spawn "mpc" "volume" "+10"; }
     Mod+Shift+bracketleft allow-when-locked=true  { spawn "playerctl" "prev"; } 
+    Mod+Shift+a allow-when-locked=true  { spawn "playerctl" "prev"; } 
     Mod+Shift+backspace   allow-when-locked=true  { spawn "playerctl" "play-pause"; } 
     Mod+Shift+apostrophe  allow-when-locked=true  { spawn "playerctl" "play-pause"; }
     Mod+Shift+bracketright allow-when-locked=true { spawn "playerctl" "next"; } 
+    Mod+Shift+S allow-when-locked=true { spawn "playerctl" "next"; } 
     Mod+K             { spawn "swaync-client" "-t" "-sw";}
     Mod+V             { spawn "qutebrowser";}
 }
@@ -427,14 +442,21 @@ environment {
     SDL_VIDEODRIVER "wayland"
     _JAVA_AWT_WM_NONREPARENTING "1"
     QT_QPA_PLATFORMTHEME "qt6ct"
-    XDG_CURRENT_DESKTOP "Sway"
     XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "gnome"
+    LC_TIME "fa_IR.UTF-8"
     DISPLAY ":0"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
 }
 window-rule {
     clip-to-geometry true
     geometry-corner-radius 8
+}
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+
+    open-floating true
+    default-floating-position x=32 y=32 relative-to="bottom-left"
 }
 prefer-no-csd
 // Settings for debugging. Not meant for normal use.

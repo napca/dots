@@ -10,11 +10,22 @@ map n scroll left
 map e scroll down
 map o scroll up
 map i scroll right
+map [index] n navigate_index collapse
+map [index] e navigate_index down
+map [index] o navigate_index up
+map [index] i navigate_index expand
 map N zoom out
 map E navigate next
 map O navigate previous
 map I zoom in
 map u recolor
+unmap <C-n>
+map <C-e> toggle_statusbar
+map <C-n> jumplist backward
+map <C-i> jumplist forward
+map t follow
+unmap f
+map f toggle_fullscreen
 # map p :open
 map k search forward
 map K search backward
@@ -25,5 +36,6 @@ set statusbar-home-tilde true
 set recolor true
 set recolor-keephue true
 set recolor-darkcolor "#eeeeee"
-set recolor-lightcolor "#252525"
+set recolor-lightcolor "#191919"
 set selection-clipboard clipboard
+set scroll-step 60

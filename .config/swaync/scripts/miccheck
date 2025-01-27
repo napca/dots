@@ -1,0 +1,2 @@
+#!/bin/sh
+amixer get Capture | tail -n1 | awk '{print ($NF == "[off]") ? "true" : "false"}'

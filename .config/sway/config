@@ -18,8 +18,8 @@ input "type:keyboard" {
 input "2:10:TPPS/2_Elan_TrackPoint" {
   accel_profile adaptive
   dwt enabled
-  pointer_accel -0.24
-  scroll_factor 0.67
+  pointer_accel 0.08
+  scroll_factor 0.8
 }
 
 # Variables
@@ -73,7 +73,7 @@ set $brightup swayosd-client --brightness raise
 
 #    workspace_auto_back_and_forth yes
 floating_modifier $mod normal
-output * bg ~/.config/sway/wall.png fill
+output * bg ~/.config/niri/wall.jpg fill
 output LVDS-1 mode     1024x768@60Hz
 output eDP-1 scale 1.3
 
@@ -215,15 +215,15 @@ bindsym --to-code {
   --locked $mod+minus exec mpc volume -2
 
   #resizing your window
-  $mod+Control+$left resize shrink width 10 px or 10 ppt
-  $mod+Control+$down resize grow height 10 px or 10 ppt
-  $mod+Control+$up resize shrink height 10 px or 10 ppt
-  $mod+Control+$right resize grow width 10 px or 10 ppt
+  $mod+Control+$left resize shrink width 15 px or 15 ppt
+  $mod+Control+$down resize grow height 15 px or 15 ppt
+  $mod+Control+$up resize shrink height 15 px or 15 ppt
+  $mod+Control+$right resize grow width 15 px or 15 ppt
 
-  $mod+Control+left resize shrink width 10 px or 10 ppt
-  $mod+Control+down resize grow height 10 px or 10 ppt
-  $mod+Control+up resize shrink height 10 px or 10 ppt
-  $mod+Control+right resize grow width 10 px or 10 ppt
+  $mod+Control+left resize shrink width 15 px or 15 ppt
+  $mod+Control+down resize grow height 15 px or 15 ppt
+  $mod+Control+up resize shrink height 15 px or 15 ppt
+  $mod+Control+right resize grow width 15 px or 15 ppt
   #playerctl for function buttons
   #screenshot
   $mod+Print exec grimshot copy output

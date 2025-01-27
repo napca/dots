@@ -4,6 +4,8 @@ smartplaylist:
   relative_to: ~/mus
   playlist_dir: ~/mus
   playlists:
+    - name: chillhop.m3u
+      query: [ 'artist:Kendrick', 'artist:JJ', 'artist:MF', 'artist:Madvillain', 'artist: CZAR', 'artist: DangerDoom', 'artist: Snoop', 'artist:rakim']
     - name: all.m3u
       query: ''
     - name: vibe.m3u

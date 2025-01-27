@@ -4,96 +4,112 @@
     "positionY": "top",
     "layer": "overlay",
     "control-center-layer": "overlay",
-    "notification-layer": "overlay",
-    "control-center-margin-top": 10,
-    "control-center-margin-bottom": 10,
-    "control-center-margin-right": 10,
-    "control-center-margin-left": 10,
-    "notification-icon-size": 64,
-    "notification-body-image-height": 75,
-    "notification-body-image-width": 150,
-    "timeout": 3,
+    "cssPriority": "user",
+    "control-center-width": 360,
+    "control-center-height": 825,
+    "control-center-margin-top": 5,
+    "control-center-margin-bottom": 5,
+    "control-center-margin-right": 5,
+    "control-center-margin-left": 0,
+    "notification-window-width": 325,
+    "notification-icon-size": 48,
+    "notification-body-image-height": 160,
+    "notification-body-image-width": 200,
+    "timeout": 4,
     "timeout-low": 2,
-    "timeout-critical": 0,
-    "fit-to-screen": true,
-    "control-center-width": 330,
-    "notification-window-width": 330,
+    "timeout-critical": 6,
+    "fit-to-screen": false,
     "keyboard-shortcuts": true,
     "image-visibility": "when-available",
     "transition-time": 200,
-    "hide-on-clear": true,
-    "hide-on-action": true,
+    "hide-on-clear": false,
+    "hide-on-action": false,
     "script-fail-notify": true,
+    "scripts": {},
+    "notification-visibility": {
+        "example-name": {
+            "state": "muted",
+            "urgency": "Normal",
+            "app-name": "Spotify"
+        }
+    },
     "widgets": [
-        "title",
-        "dnd",
-        "notifications",
-        "mpris",
+        "label",
+        "buttons-grid",
+        "backlight",
         "volume",
-        "buttons-grid"
+        "mpris",
+        "title",
+        "notifications"
     ],
     "widget-config": {
         "title": {
-            "text": "Notification Center",
+            "text": "Notifications",
             "clear-all-button": true,
-            "button-text": "󰆴 Clear All"
+            "button-text": "󰎟"
         },
         "dnd": {
-            "text": "Do Not Disturb"
+            "text": "DND"
         },
         "label": {
-            "max-lines": 1,
-            "text": "Notification Center"
+            "max-lines": 0,
+            "text": " "
         },
         "mpris": {
-            "image-size": 80,
-            "image-radius": 7
+            "image-size": 96,
+            "image-radius": 20
+        },
+        "backlight": {
+            "label": "󰃟 ",
+            "subsystem": "backlight",
+            "device": "intel_backlight"
         },
         "volume": {
-            "label": "󰕾",
-            "show-per-app": true
+            "label": " ",
+            "expand-button-label": "󰁆",
+            "collapse-button-label": "󰁞",
+            "show-per-app": true,
+            "show-per-app-icon": true,
+            "show-per-app-label": false
         },
         "buttons-grid": {
             "actions": [
                 {
+                    "label": "󰤥",
+                    "type": "toggle",
+                    "active": true,
+                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+                    "update-command": "sh -c '[[ $(nmcli r wifi) == \"enabled\" ]] && echo true || echo false'"
+                },
+                {
+                    "label": "",
+                    "type": "toggle",
+                    "active": false,
+                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && rfkill unblock bluetooth || rfkill block bluetooth'",
+                    "update-command": "sh -c 'rfkill list bluetooth | grep -o yes >/dev/null && echo false || echo true'"
+                },
+                {
+                    "label": "󰍭",
+                    "type": "toggle",
+                    "active": false,
+                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && amixer set Capture nocap || amixer set Capture cap'",
+                    "update-command": "sh -c '~/.config/swaync/scripts/miccheck'"
+                },
+                {
+                    "label": "",
+                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && swaync-client -dn || swaync-client -df'",
+                    "type": "toggle",
+                    "update-command": "swaync-client -D"
+                },
+                {
+                    "label": "󰽥",
+                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && ~/.local/bin/nightlight|| killall wlsunset'",
+                    "type": "toggle",
+                    "update-command": "sh -c 'pgrep wlsunset && echo true || echo false'"
+                },
+                {
                     "label": "󰐥",
-                    "command": "systemctl poweroff"
-                },
-                {
-                    "label": "󰜉",
-                    "command": "systemctl reboot"
-                },
-                {
-                    "label": "󰌾",
-                    "command": "$HOME/.config/hypr/scripts/lock-session.sh"
-                },
-                {
-                    "label": "󰍃",
-                    "command": "hyprctl dispatch exit"
-                },
-                {
-                    "label": "󰤄",
-                    "command": "systemctl suspend"
-                },
-                {
-                    "label": "󰕾",
-                    "command": "swayosd-client --output-volume mute-toggle"
-                },
-                {
-                    "label": "󰍬",
-                    "command": "swayosd-client --input-volume mute-toggle"
-                },
-                {
-                    "label": "󰖩",
-                    "command": "$HOME/.local/bin/shved/rofi-menus/wifi-menu.sh"
-                },
-                {
-                    "label": "󰂯",
-                    "command": "blueman-manager"
-                },
-                {
-                    "label": "",
-                    "command": "obs"
+                    "command": "sh -c '~/.config/rofi/powermenu.sh'"
                 }
             ]
         }

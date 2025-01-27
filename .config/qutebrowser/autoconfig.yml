@@ -448,6 +448,7 @@ settings:
     https://soft98.ir: false
     https://torob.com: false
     https://www.auslogics.com: false
+    https://www.chess.com: true
     https://www.digikala.com: false
     https://www.duolingo.com: true
     https://www.livemint.com: false
@@ -457,7 +458,7 @@ settings:
   content.pdfjs:
     global: false
   content.proxy:
-    global: socks://localhost:8086/
+    global: system
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
     https://mail.proton.me#mailto=%25s: false

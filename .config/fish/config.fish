@@ -63,7 +63,7 @@ alias xq 'sudo xbps-query -Rs'
 alias xr 'sudo xbps-remove'
 alias proton 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/proton ~/.steam/steam/steamapps/common/Proton\ 9.0\ \(Beta\)/proton run'
 alias protonexp 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonexp ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton run'
-alias protonge 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonge /usr/share/steam/compatibilitytools.d/proton-ge-custom/proton run'
+alias protonge 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonge $HOME/.local/share/Steam/compatibilitytools.d/proton-ge-custom/proton run'
 alias protonge32 'DXVK_HUD=fps STEAM_COMPAT_CLIENT_INSTALL_PATH=.local/share/Steam STEAM_COMPAT_DATA_PATH=$HOME/Games/pfx/protonge32 WINEARCH=win32 /usr/share/steam/compatibilitytools.d/proton-ge-custom/proton run'
 #wgu() {
 #    sudo wg-quick down $1;doas wg-quick up $1

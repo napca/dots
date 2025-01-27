@@ -6,8 +6,11 @@
 vim.cmd("set wrap linebreak termbidi tabstop=4 shiftwidth=4 expandtab relativenumber")
 vim.cmd("source ~/.config/nvim/workman.vim")
 lvim.plugins = {
-    'Everblush/nvim',
-    name = 'everblush',
+
+    "sainnhe/everforest",
+    config = function()
+        vim.g.everforest_background = 'hard'
+    end,
     "Mofiqul/adwaita.nvim",
     lazy = false,
     priority = 1000,
@@ -16,14 +19,14 @@ lvim.plugins = {
         vim.g.adwaita_darker = true -- for darker version
         --     vim.g.adwaita_disable_cursorline = true -- to disable cursorline
         --     vim.g.adwaita_transparent = true        -- makes the background transparent
-        vim.cmd('colorscheme adwaita')
+        -- vim.cmd('colorscheme everblush')
     end,
     "sainnhe/gruvbox-material",
     config = function()
-        vim.g.gruvbox_material_background = 'soft'
+        vim.g.gruvbox_material_background = 'hard'
         vim.g.gruvbox_material_better_performance = true
-        vim.cmd('colorscheme gruvbox-material')
-        vim.g.lightline = "{'colorscheme' : 'gruvbox-material'}"
+        -- vim.cmd('colorscheme gruvbox-material')
+        -- vim.g.lightline = "{'colorscheme' : 'gruvbox-material'}"
     end,
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {},
@@ -70,6 +73,7 @@ vim.g.vimtex_compiler_latexmk = {
         '-interaction=nonstopmode',
     },
 }
+vim.g.everforest_background = 'hard'
 vim.g.mkdp_browser = '/bin/qutebrowser'
 vim.g.mkdp_port = '8569'
 vim.g.mkdp_theme = 'dark'

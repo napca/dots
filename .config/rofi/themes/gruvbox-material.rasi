@@ -6,14 +6,20 @@
  */
 
 * {
-	gruv0: #282828;
+    bg: #202020;
+    item: #2a2a2a;
+    surface: #363636;
+    hover: #404040;
+    active: #454757;
+	dimfg: #999999;
+    fg: #ffffff;
+	gruv0: #202020;
 	gruv1: #32302f;
 	gruv2: #45403d;
 	gruv3: #5a524c;
 
 	gruv4: #fbf1c7;
 	gruv5: #f4e8be;
-	gruv6: #eee0b7;
 
 	gruv7: #a89984;
 	gruv8: #928374;
@@ -29,7 +35,7 @@
     reddark: #c14a4a;
     yellowdark: #b47109;
 
-    foreground:  @gruv9;
+    foreground:  #ffffff;
     background-color:  transparent;
     
     highlight: underline bold #eee0b7;
@@ -41,21 +47,22 @@
 window {
     location: center;
     anchor:   center;
-    border-radius: 10px;
-    height: 70%;
-    width: 80%;
+    width: 70%;
     dynamic: true;
 
     background-color: @transparent;
     spacing: 0;
     children:  [mainbox];
     orientation: horizontal;
+    border-radius: 20px;
+    text-font: "Fira Sans 2";
 }
 
 mainbox {
     spacing: 0;
     dynamic: true;
     children: [ inputbar, message, listview ];
+    border-radius: 20px 20px 20px 20px;
 }
 
 message {
@@ -66,13 +73,14 @@ message {
 }
 
 inputbar {
-    color: @gruv6;
+    color: @dimfg;
     padding: 14px;
-    background-color: @gruv0;
+    background-color: @surface;
     border-color: @gruv0;
+    margin: 4px 0px;
 
-    border: 1px;
     border-radius: 10px 10px 0px 0px;
+    border-radius: 20px;
 }
 
 entry, prompt, case-indicator {
@@ -83,32 +91,39 @@ entry, prompt, case-indicator {
 prompt {
     margin: 0px 1em 0em 0em ;
 }
+entry {
+    color: @fg;
+}
 
 listview {
     layout: vertical;
     padding: 8px;
-    border-radius: 0px 0px 10px 10px;
-    border: 2px 2px 2px 2px;
     border-color: @gruv0;
     background-color: @gruv0;
     dynamic: true;
     cycle: true;
-    columns:  8;
+        border-color: @surface;
+    border: 2px;
+
+    columns:  9;
+    lines: 7;
     fixed-columns:               false;
+    border-radius: 20px;
 }
 
 element {
-    padding: 5px;
+    padding: 4px;
     vertical-align: 0.5;
+    margin: 4px 3px;
     border-radius: 10px;
-    color: @foreground;
-    text-color: @gruv6;
-    background-color: @gruv1;
+    color: @item;
+    text-color: @fg;
+    background-color: @item;
     orientation: vertical;
 }
 
 element.normal.active {
-    background-color: @yellow;
+    background-color: @active;
 }
 
 element.normal.urgent {
@@ -116,7 +131,7 @@ element.normal.urgent {
 }
 
 element.selected.normal {
-    background-color: @gruv7;
+    background-color: @active;
     text-color: @gruv0;
 }
 
@@ -129,20 +144,19 @@ element.selected.urgent {
 }
 
 element.alternate.normal {
-    background-color: @transparent;
+    background-color: @item;
 }
 
 element-icon {
-    size: 64px;
-    margin: 0 10 0 0;
+    size: 48px;
+    padding: 4 0 0 0;
     vertical-align: 0.5;
     background-color: inherit;
-    text-color: @gruv6;
+    text-color: @fg;
     dynamic: true;
 }
 element-text {
-    text-color: @gruv6;
-    vertical-align:              0.5;
+    text-color: @fg;
     horizontal-align:            0.5;
 }
 

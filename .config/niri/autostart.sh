@@ -8,6 +8,8 @@ swaync &
 sleep 0.8
 kdeconnect-indicator &
 gnome-keyring-daemon -r -d &
+LC_TIME=fa_IR.UTF-8 gnome-calendar --gapplication-service &
+LC_TIME=fa_IR.UTF-8 gnome-clocks --gapplication-service &
 sleep 1
 (
     killall mpd

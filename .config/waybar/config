@@ -1,9 +1,9 @@
 {
     "layer": "top",
     "spacing": 0,
-    "modules-left": ["wlr/taskbar","niri/workspaces", "custom/wlsunset", "sway/scratchpad", "mpd"],
-    "modules-center": ["custom/window"],
-    "modules-right": ["tray", "pulseaudio", "backlight", "niri/language", "battery", "network", "clock", "custom/power"],
+    "modules-left": ["sway/workspaces","niri/workspaces", "wlr/taskbar", "sway/scratchpad", "mpd"],
+    "modules-center": ["niri/window"],
+    "modules-right": ["tray","backlight", "niri/language","pulseaudio","battery", "clock", "custom/power"],
     "custom/void-linux": {
         "format": ""
 	},
@@ -61,8 +61,8 @@
                      "on": "󰑘 "
                 },
                 "state-icons": {
-                     "paused": " 󰏤",
-                     "playing": " 󰐊"
+                     "paused": "󰏤",
+                     "playing": "󰐊"
                 },
                 "tooltip-format": "MPD (connected)",
                 "tooltip-format-disconnected": "MPD (disconnected)",
@@ -70,8 +70,8 @@
     "title-len": 20
     },
         "network": {
-        "format": "{icon} ",
-	"format-wifi":	"{essid} {icon} ",
+        "format": "{icon}",
+	"format-wifi":	"{essid} {icon}",
         "format-alt": "{ipaddr}/{cidr} {icon} ",                                                                                              
         "format-alt-click": "click-right",                                                                                                   
         "format-icons": {                                                                                                                    
@@ -108,7 +108,7 @@
     },
     "backlight": {
          "device": "acpi_video0",
-        "format": "{percent}% {icon} ",
+        "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""],
         "on-scroll-up": "brightnessctl set +1%",
         "on-scroll-down": "brightnessctl set 1%-"
@@ -122,7 +122,7 @@
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% 󰂄",
         "format-alt": "{time} {icon}",
-        "format-icons": ["󰁺", "󰁽", "󰁿", "󰂁", "󰁹"]
+        "format-icons": ["󰂃","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -130,22 +130,22 @@
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": "{icon} {format_source}",
         "format-muted": "{volume}% 󰝟 {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
+        "format-source": "󰍬",
+        "format-source-muted": "󰍭",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "headphone": "󰋋",
+            "hands-free": "󰋋",
+            "headset": "󰂯",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": ["󰕿","󰖀","󰕾"]
         },
         "on-click": "amixer set Capture toggle"
     },
     "custom/power": {
-        "format": " ",
-	"on-click": "nwgbar"
+        "format": "",
+	"on-click": "~/.config/rofi/powermenu.sh"
 	}
 }
 
