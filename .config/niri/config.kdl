@@ -113,7 +113,21 @@ scale 1.25
 }
 
 layout {
-    // You can change how the focus ring looks.
+     tab-indicator {
+        corner-radius 8
+        gaps-between-tabs 4
+        width 5
+        gap 4
+        inactive-color "#888888aa"
+        length total-proportion=0.4
+        position "left"
+        place-within-column
+        hide-when-single-tab
+    }
+    // Enable shadows.
+    shadow {
+        on
+    }
     focus-ring {
         // Uncomment this line to disable the focus ring.
         // off
@@ -240,7 +254,7 @@ binds {
     Mod+grave { spawn "rofitoggle" "-show" "window" "-theme" "gruvbox-material-alttab"; }
     Mod+Z { spawn "loginctl" "lock-session"; }
     Mod+Shift+Z { spawn "sh" "-c" "systemctl suspend"; }
-    Mod+Shift+V {spawn  "sh" "-c" "killall waybar || waybar";}
+    Mod+Shift+V {spawn  "sh" "-c" "killall waybar ||GTK_THEME=adw-gtk3-dark  waybar";}
 
     // You can also use a shell:
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
@@ -278,6 +292,7 @@ binds {
     Alt+Shift+Tab    {focus-window-up-or-column-left;}
     Mod+Shift+C       { toggle-window-floating; }
     Mod+C { switch-focus-between-floating-and-tiling; }
+    Mod+D { toggle-column-tabbed-display; }
 
 
     Mod+Shift+Left  { move-column-left; }
@@ -372,6 +387,7 @@ binds {
     Mod+Period { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
+    Mod+H { expand-column-to-available-width; }
     Mod+T { maximize-column; }
     Mod+Shift+T { fullscreen-window; }
     Mod+M { center-column; }
@@ -444,7 +460,6 @@ environment {
     QT_QPA_PLATFORMTHEME "qt6ct"
     XDG_SESSION_TYPE "wayland"
     XDG_CURRENT_DESKTOP "gnome"
-    LC_TIME "fa_IR.UTF-8"
     DISPLAY ":0"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
 }

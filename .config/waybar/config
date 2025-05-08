@@ -1,8 +1,8 @@
 {
     "layer": "top",
     "spacing": 0,
-    "modules-left": ["sway/workspaces","niri/workspaces", "wlr/taskbar", "sway/scratchpad", "mpd"],
-    "modules-center": ["niri/window"],
+    "modules-left": ["sway/workspaces","niri/workspaces","hyprland/workspaces","sway/scratchpad", "mpd"],
+    "modules-center": ["hyprland/window"],
     "modules-right": ["tray","backlight", "niri/language","pulseaudio","battery", "clock", "custom/power"],
     "custom/void-linux": {
         "format": ""

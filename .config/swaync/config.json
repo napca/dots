@@ -34,8 +34,8 @@
         }
     },
     "widgets": [
-        "label",
         "buttons-grid",
+        "dnd",
         "backlight",
         "volume",
         "mpris",
@@ -49,7 +49,7 @@
             "button-text": "󰎟"
         },
         "dnd": {
-            "text": "DND"
+            "text": "󰍷"
         },
         "label": {
             "max-lines": 0,
@@ -96,10 +96,11 @@
                     "update-command": "sh -c '~/.config/swaync/scripts/miccheck'"
                 },
                 {
-                    "label": "",
-                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && swaync-client -dn || swaync-client -df'",
+                    "label": "󱎖",
                     "type": "toggle",
-                    "update-command": "swaync-client -D"
+                    "active": true,
+                    "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] &&  gsettings set org.gnome.desktop.interface color-scheme prefer-dark ||  gsettings set org.gnome.desktop.interface color-scheme prefer-light'",
+                    "update-command": "sh -c 'gsettings get org.gnome.desktop.interface color-scheme | grep dark && echo true || echo false'"
                 },
                 {
                     "label": "󰽥",

@@ -24,4 +24,4 @@ if pgrep -x "wlsunset" >/dev/null; then
 fi
 
 # Run wlsunset with the new value
-wlsunset -t $VAR
+wlsunset -t $VAR -s 20:00 -S 8:00

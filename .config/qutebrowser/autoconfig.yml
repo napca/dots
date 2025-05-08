@@ -344,19 +344,19 @@ settings:
   colors.tabs.bar.bg:
     global: '#1d2021'
   colors.tabs.even.bg:
-    global: '#504945'
+    global: '#151515'
   colors.tabs.even.fg:
-    global: '#d5c4a1'
+    global: '#dddddd'
   colors.tabs.indicator.error:
-    global: '#fb4934'
+    global: '#ff0000'
   colors.tabs.indicator.start:
-    global: '#83a598'
+    global: '#0000aa'
   colors.tabs.indicator.stop:
-    global: '#8ec07c'
+    global: '#00aa00'
   colors.tabs.odd.bg:
-    global: '#3c3836'
+    global: '#202020'
   colors.tabs.odd.fg:
-    global: '#d5c4a1'
+    global: '#dddddd'
   colors.tabs.pinned.even.bg:
     global: '#504945'
   colors.tabs.pinned.even.fg:
@@ -374,11 +374,11 @@ settings:
   colors.tabs.pinned.selected.odd.fg:
     global: '#3c3836'
   colors.tabs.selected.even.bg:
-    global: '#a89984'
+    global: '#b0bbbf'
   colors.tabs.selected.even.fg:
     global: '#3c3836'
   colors.tabs.selected.odd.bg:
-    global: '#a89984'
+    global: '#b0bbbf'
   colors.tabs.selected.odd.fg:
     global: '#3c3836'
   colors.webpage.darkmode.algorithm:
@@ -477,6 +477,8 @@ settings:
     global: default_size default_family
   fonts.statusbar:
     global: default_size default_family
+  fonts.tabs.selected:
+    global: default_size default_family
   fonts.web.family.cursive:
     global: null
   fonts.web.family.fantasy:
@@ -510,8 +512,28 @@ settings:
     - disable-seccomp-filter-sandbox
   scrolling.smooth:
     global: true
+  tabs.favicons.scale:
+    global: 1.0
+  tabs.indicator.padding:
+    global:
+      bottom: 1
+      left: 0
+      right: 2
+      top: 1
+  tabs.padding:
+    global:
+      bottom: 0
+      left: 1
+      right: 1
+      top: 0
   tabs.position:
     global: top
+  tabs.show:
+    global: always
+  tabs.title.alignment:
+    global: left
+  tabs.width:
+    global: 250
   url.default_page:
     global: https://searx.info/
   url.searchengines:

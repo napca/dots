@@ -34,6 +34,7 @@ window#waybar {
 }
 
 #taskbar button.active,
+#workspaces button.active,
 #workspaces button.focused {
     background-color: #414A63;
 }

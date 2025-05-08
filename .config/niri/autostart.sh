@@ -3,13 +3,13 @@
 swaync &
 (
     sleep 0.6
-    waybar
+    GTK_THEME=adw-gtk3-dark waybar
 ) &
 sleep 0.8
 kdeconnect-indicator &
 gnome-keyring-daemon -r -d &
-LC_TIME=fa_IR.UTF-8 gnome-calendar --gapplication-service &
-LC_TIME=fa_IR.UTF-8 gnome-clocks --gapplication-service &
+gnome-calendar --gapplication-service &
+gnome-clocks --gapplication-service &
 sleep 1
 (
     killall mpd
@@ -24,13 +24,12 @@ sleep 1
 #sleep 0.4;(nekoray &
 #firefox &
 #QT_QPA_PLATFORMTHEME=gtk3 telegram-desktop) &
-gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark-solid' &
-gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' &
+gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' &
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus' &
 gsettings set org.gnome.desktop.interface cursor-theme 'elementary' &
-gsettings set org.gnome.desktop.interface font-name 'JetBrains Nerd Font Mono 11' &
 import-gsettings &
 /lib/kdeconnectd &
-swayosd-server --top-margin=0.05 &
+GTK_THEME=adw-gtk3-dark swayosd-server --top-margin=0.05 &
 swayidle -w \
     timeout 1200 'pgrep -x swaylock || ~/.config/sway/lock.sh &' \
     timeout 1210 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \

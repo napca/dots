@@ -80,4 +80,3 @@ alias mpv 'mpv --screenshot-format=png --screenshot-directory=~/pic/Screenshots/
 alias zzz 'swaylock -c 000000 & sudo /usr/bin/zzz'
 alias ZZZ 'swaylock -c 000000 & sudo /usr/bin/ZZZ'
 alias lock 'swaylock -c 000000'
-set PATH $PATH:/home/napca/.config/emacs/bin

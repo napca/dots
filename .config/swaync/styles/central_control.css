@@ -19,9 +19,12 @@
 @define-color item #303030;
 @define-color surface alpha(#ffffff, 0.1);
 @define-color hover alpha(#ffffff, 0.2);
-@define-color active alpha(alpha(@lavender, 0.5), 0.5);
+@define-color active alpha(@lavender, 0.25);
+@define-color activehover alpha(@lavender, 0.35);
 
 * {
+  margin-top: 0;
+  padding-top: 0;
     color: @text;
     /* all: unset; */
     font-size: 1rem;
@@ -39,6 +42,8 @@
 /* Avoid 'annoying' backgroud */
 .blank-window {
     background: transparent;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 /* CONTROL CENTER ------------------------------------------------------------------------ */
@@ -47,21 +52,34 @@
 
 /* Buttons menu */
 .widget-buttons-grid {
+  margin-top: 0;
+  padding-top: 0;
     margin: 2px 1px;
     font-family: CommitMono Nerd Font;
     font-size: 3rem;
     border-radius: 20px;
+    padding: 0px 5px;
+}
+.widget-buttons-grid * {
+  font-size: 20px;
+  padding: 0px;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button {
-    font-size: 3rem;
-    margin: 2px 2px;
-    padding: 1.5rem 3rem;
+    border: 3px solid @surface;
+    margin: 4px 3px;
+    padding: 0.75rem 2.25rem;
     background: @surface;
     color: @crust;
-    border-radius: 999px;
+    border-radius: 32px;
 }
 
+.widget-buttons-grid>flowbox>flowboxchild>button label {
+  color: alpha(white, 0.4);
+}
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked label {
+  color: alpha(mix(@lavender, white, 0.6), 0.7);
+}
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
     background: @hover;
     color: @crust;
@@ -69,7 +87,6 @@
 
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
     font-family: CommitMono Nerd Font;
-    font-size: 2rem;
     background: @active;
     color: @crust;
 }
@@ -85,45 +102,43 @@
     border-radius: 20px;
     background: @surface;
 }
-
-slider {}
-
-.widget-backlight label {}
-
 .widget-backlight trough {
     background: @surface;
-    margin: 0 8px;
+    margin: 0 0px;
 }
 
 .widget-backlight trough highlight {
     background: @active;
     border: unset;
+    margin: 4px;
 }
 
 .widget-backlight button {
     padding: 0 4px;
 }
+.widget-backlight trough:hover, .widget-volume trough:hover{
+  background-color: @hover;
+}
+.widget-backlight trough highlight:hover, .widget-volume trough highlight:hover{
+  background-color: @activehover;
+}
 
 /* Volume */
 .widget-volume {
-    padding: 8px 16px;
+    padding: 4px 16px;
     margin: 0 0 8px 0;
     border-radius: 20px;
     background: @surface;
 }
-
-slider {}
-
-.widget-volume label {}
-
 .widget-volume trough {
     background: @surface;
-    margin: 0 8px;
+    margin: 4px 0px;
 }
 
 .widget-volume trough highlight {
     background: @active;
     border: unset;
+    margin: 4px;
 }
 
 .widget-volume button {
@@ -132,7 +147,8 @@ slider {}
 
 /* Music player */
 .widget-mpris {
-    background: transparent;
+    background-color: transparent;
+    color: transparent;
     border-radius: 20px;
     margin: 0px 0px 0px 0px;
     padding-top: 10px;
@@ -141,21 +157,25 @@ slider {}
 
 .widget-mpris-player {
     border-radius: 20px;
-    background: alpha(#303030, 0.7);
+    background-color: alpha(#303030, 0.4);
     box-shadow: none;
     padding: 4px;
 }
-
+.widget-mpris>box>button:hover{
+  color: transparent;
+  background-color: transparent;
+}
 .widget-mpris>box>button {
     border-radius: 20px;
-    background: transparent;
-    color: @active;
+    background-color: transparent;
+    color: transparent;
     padding: 0px 0px;
     margin: 55px -30px;
 }
 
 .widget-mpris button {
-    background: @active;
+    background-color: @active;
+    color: transparent;
     border-radius: 20px;
     margin: 0px 0px;
 
@@ -163,7 +183,8 @@ slider {}
 }
 
 .widget-mpris button:hover {
-    background: @hover;
+    background-color: @activehover;
+    color: @lavender;
 }
 
 .widget-mpris-album-art {
@@ -187,6 +208,9 @@ slider {}
 .widget-title {
     font-size: 1.5rem;
     margin: 0 4px 0px 4px;
+      margin-top: 0;
+  padding-top: 0;
+
 }
 
 .widget-title button {
@@ -197,46 +221,6 @@ slider {}
 
 .widget-title button:hover {
     background: @hover;
-}
-
-/* Do not disturb */
-.widget-dnd {
-    margin: 0 4px 8px 4px;
-}
-
-.widget-dnd>switch {
-    color: @text;
-    background: @surface;
-    border-radius: 20px;
-    box-shadow: none;
-    padding: 2px;
-}
-
-.widget-dnd>switch:hover {
-    background: @hover;
-    color: transparent;
-}
-
-.widget-dnd>switch:hover:checked {
-    background: @hover;
-    color: transparent;
-}
-
-.widget-dnd>switch:checked {
-    background: @active;
-    color: transparent;
-}
-
-.widget-dnd>switch slider {
-    color: @crust;
-    background: @hover;
-    border-radius: 20px;
-    border: 2px solid @active;
-}
-
-.widget-dnd>switch:checked slider {
-    color: @transparent;
-    background: @active;
 }
 
 /* Buttons */
@@ -259,13 +243,7 @@ slider {}
     padding: 8px 8px 8px 16px;
 }
 
-.control-center .notification-row .notification-background .notification.critical {
-    color: @red;
-}
 
-.control-center .notification-row .notification-background .notification .notification-content {}
-
-.control-center .notification-row .notification-background .notification>*:first-child>* {}
 
 .control-center .notification-row .notification-background .notification>*:last-child>* {
     min-height: 3.3em;
@@ -309,11 +287,6 @@ trough {
     border-radius: 20px;
 }
 
-progressbar {
-    background-color: @red;
-}
-
-trough {}
 
 trough highlight {
     padding: 8px;
@@ -322,17 +295,17 @@ trough highlight {
     border-radius: 20px;
 }
 
-trough slider {
-    outline: none;
-    border: none;
-}
+/* trough slider { */
+/*     outline: none; */
+/*     border: none; */
+/* } */
 
-trough slider:hover {}
 
 /* Notifications expanded-group */
 
 .notification-group {
     margin: 0 4px 8px 4px;
+    padding: 3px 0px;
 }
 
 .notification-group-headers {
@@ -356,3 +329,64 @@ trough slider:hover {}
 .notification-group-close-all-button:hover {
     background: @hover;
 }
+/* Do not disturb */
+.widget-dnd {
+    color: @text;
+    background-color: @surface;
+  margin-left: 218px;
+  margin-right: 5px;
+  padding-right: 0px;
+  border-radius: 99px;
+}
+.widget-dnd * {
+  color: transparent;
+  min-width: 0px;
+  border-radius: 0;
+}
+.widget-dnd>label {
+  color: alpha(white, 0.4);
+  font-size: 1.5rem;
+  padding-left: 8px;
+}
+.widget-dnd>switch {
+    color: transparent;
+    background-color: @surface;
+    box-shadow: none;
+    margin: 4px 0px;
+    padding: 3px 3px;
+    margin-right: 5px;
+    border-radius: 20px;
+    border: 2px solid @surface;
+}
+
+.widget-dnd>switch:hover {
+    background-color: @hover;
+    color: @hover;
+}
+
+.widget-dnd>switch:hover:checked {
+    background-color: @activehover;
+    color: @hover;
+}
+
+.widget-dnd>switch:hover:checked slider {
+    background-color: @activehover;
+    color: @active;
+}
+.widget-dnd>switch:checked {
+    background: @active;
+    color: @active;
+}
+
+.widget-dnd>switch slider {
+    color: @blue;
+    background-color: @hover;
+    border-radius: 20px;
+    padding: 3px 0;
+}
+
+.widget-dnd>switch:active slider {
+    color: @active;
+    background-color: @active;
+}
+
