@@ -2,7 +2,7 @@
     "layer": "top",
     "spacing": 0,
     "modules-left": ["sway/workspaces","niri/workspaces","hyprland/workspaces","sway/scratchpad", "mpd"],
-    "modules-center": ["hyprland/window"],
+    "modules-center": ["hyprland/window", "sway/window"],
     "modules-right": ["tray","backlight", "niri/language","pulseaudio","battery", "clock", "custom/power"],
     "custom/void-linux": {
         "format": ""
@@ -45,7 +45,6 @@
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
                 "format-disconnected": "Disconnected",
                 "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
-                "interval": 2,
                 "consume-icons": {
                      "on": "󰮯 " // Icon shows only when "consume" is on
                 },
@@ -61,8 +60,8 @@
                      "on": "󰑘 "
                 },
                 "state-icons": {
-                     "paused": "󰏤",
-                     "playing": "󰐊"
+                     "playing": "󰏤",
+                     "paused": "󰐊"
                 },
                 "tooltip-format": "MPD (connected)",
                 "tooltip-format-disconnected": "MPD (disconnected)",

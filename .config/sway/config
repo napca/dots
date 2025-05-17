@@ -55,7 +55,7 @@ set $up o
 set $right i
 
 #Your preferred terminal emulator
-set $term xfce4-terminal -T floatingTerminal -e tmux
+set $term foot ~/.local/bin/starttmux
 
 #set $voldown pactl set-sink-volume @DEFAULT_SINK@ -2% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
 #set $volup pactl set-sink-volume @DEFAULT_SINK@ +2% && pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print substr($5,1,length($5)-1)}' > $WOBSOCK
@@ -77,7 +77,7 @@ output * bg ~/.config/niri/wall.jpg fill
 output LVDS-1 mode     1024x768@60Hz
 output eDP-1 scale 1.3
 
-seat seat0 xcursor_theme 'Vimix-white-cursors' 24
+seat seat0 xcursor_theme 'elementary' 24
 bindgesture {
   swipe:4:left workspace prev
   swipe:4:right workspace next
@@ -108,7 +108,7 @@ bindsym --to-code {
   --locked $mod+Control+minus exec $brightdown
 
 ##   Toggle control center
-  $mod+Shift+v exec killall waybar || GTK_THEME=adw-gtk3-dark waybar
+  $mod+Shift+v exec killall waybar || XDG_CURRENT_DESKTOP=sway waybar
   $mod+Shift+k exec swaync-client -t -sw
   $mod+Control+r input type:keyboard xkb_switch_layout 0
   $mod+Control+t input type:keyboard xkb_switch_layout 1
@@ -116,8 +116,7 @@ bindsym --to-code {
   --release $alt+Space exec notify-send $(swaymsg -t get_inputs | jq '.[0].xkb_active_layout_name'|tr -d '"') -t 650 -e
   $mod+shift+x exec swaymsg "output * dpms off"
   $mod+x exec swaymsg "output * dpms on"
-  $mod+Return [con_mark="term"] scratchpad show
-  $mod+shift+Return exec $term
+  $mod+Return exec $term
 	$mod+Escape exec "~/.config/sway/lock.sh"
 	$mod+z exec "~/.config/sway/lock.sh"
 	$mod+shift+z exec "systemctl suspend"
@@ -288,5 +287,5 @@ exec swayidle -w \
 exec_always {
 ##These always run when you reload sway
   xset r 66
-  killall waybar;GTK_THEME=adw-gtk3-dark waybar
+  killall waybar; XDG_CURRENT_DESKTOP=sway waybar
 }

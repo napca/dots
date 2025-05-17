@@ -6,7 +6,6 @@
     "control-center-layer": "overlay",
     "cssPriority": "user",
     "control-center-width": 360,
-    "control-center-height": 825,
     "control-center-margin-top": 5,
     "control-center-margin-bottom": 5,
     "control-center-margin-right": 5,
@@ -18,7 +17,7 @@
     "timeout": 4,
     "timeout-low": 2,
     "timeout-critical": 6,
-    "fit-to-screen": false,
+    "fit-to-screen": true,
     "keyboard-shortcuts": true,
     "image-visibility": "when-available",
     "transition-time": 200,
@@ -62,7 +61,7 @@
         "backlight": {
             "label": "󰃟 ",
             "subsystem": "backlight",
-            "device": "intel_backlight"
+            "device": "acpi_video0"
         },
         "volume": {
             "label": " ",

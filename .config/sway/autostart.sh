@@ -3,16 +3,13 @@
 swaync &
 (
     sleep 0.6
-    GTK_THEME=adw-gtk3-dark waybar
+    waybar
 ) &
-pipewire &
-pipewire-pulse &
-#pulseaudio &
-sleep 0.8
-wireplumber &
 kdeconnect-indicator &
 /lib/xdg-desktop-portal-wlr -r &
 gnome-keyring-daemon -r -d &
+blueman-applet &
+nm-applet &
 sleep 1
 (
     killall mpd
@@ -36,4 +33,9 @@ gsettings set org.gnome.desktop.interface font-name 'JetBrains Nerd Font Mono 11
 import-gsettings &
 /lib/kdeconnectd &
 sway-audio-idle-inhibit &
-autotiling -l 4 &
+swayidle -w \
+    timeout 1200 'pgrep -x swaylock || ~/.config/sway/lock.sh &' \
+    timeout 1210 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep '~/.config/sway/lock.sh' \
+    lock '~/.config/sway/lock.sh ' &

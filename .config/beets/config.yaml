@@ -31,13 +31,18 @@ embedart:
   remove_art_file: no
 library: ~/.config/beets/musiclibrary.db
 import:
+  group_albums: yes
+  incremental: no
   move: yes
   copy: no
+  timid: yes
+  autotag: no
   write: yes
+  delete: yes
   duplicate_action: merge
-  group_albums: yes
+  ignore: albumdisambig albumtype country label catalognum
 aunique:
   keys: albumartist album
-  disambiguators: albumtype year label
+  disambiguators: year
   bracket: '[]'
 
