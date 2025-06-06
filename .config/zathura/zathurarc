@@ -25,7 +25,6 @@ map <C-n> jumplist backward
 map <C-i> jumplist forward
 map t follow
 unmap f
-map f toggle_fullscreen
 # map p :open
 map k search forward
 map K search backward

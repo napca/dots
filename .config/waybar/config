@@ -2,8 +2,8 @@
     "layer": "top",
     "spacing": 0,
     "modules-left": ["sway/workspaces","niri/workspaces","hyprland/workspaces","sway/scratchpad", "mpd"],
-    "modules-center": ["hyprland/window", "sway/window"],
-    "modules-right": ["tray","backlight", "niri/language","pulseaudio","battery", "clock", "custom/power"],
+    "modules-center": ["sway/window", "niri/window"],
+    "modules-right": ["tray","backlight", "sway/language", "niri/language", "pulseaudio","battery", "clock", "custom/power"],
     "custom/void-linux": {
         "format": ""
 	},
@@ -23,6 +23,9 @@
     "max-length":40,
 	},
   "niri/language": {
+    "format": "{short} 󰌌"
+  },
+  "sway/language": {
     "format": "{short} 󰌌"
   },
 	"custom/wlsunset":{

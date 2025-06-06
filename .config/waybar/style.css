@@ -18,7 +18,7 @@ window#waybar {
 #workspaces button {
     padding: 0px;
     margin: 2px 1px;
-    color: #ffffff;
+    color: red;
     border-radius: 2px;
     background-color: #2a2a2a;
 }
@@ -41,8 +41,8 @@ window#waybar {
 
 
 #taskbar button.urgent,
-#workspaces button.urgent {
-    background-color: rgba(243, 139, 168, 0.2);
+#workspaces button.urgent * {
+  color: #fcee92;
 }
 
 #taskbar button.empty,
@@ -140,11 +140,6 @@ window#waybar {
 
 
 
-#workspaces {
-    background-color: transparent;
-    margin-right: 2px;
-
-}
 
 #scratchpad {
     background: rgba(69, 71, 90, 0);

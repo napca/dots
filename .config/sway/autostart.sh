@@ -33,6 +33,7 @@ gsettings set org.gnome.desktop.interface font-name 'JetBrains Nerd Font Mono 11
 import-gsettings &
 /lib/kdeconnectd &
 sway-audio-idle-inhibit &
+swaykbdd & 
 swayidle -w \
     timeout 1200 'pgrep -x swaylock || ~/.config/sway/lock.sh &' \
     timeout 1210 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \

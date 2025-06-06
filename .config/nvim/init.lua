@@ -44,6 +44,7 @@ require 'lspconfig'.qmlls.setup{}
 require 'lspconfig'.pyright.setup{}
 require 'lspconfig'.asm_lsp.setup{}
 require 'lspconfig'.texlab.setup{}
+require 'lspconfig'.gopls.setup{}
 vim.schedule(function()
   require "mappings"
 end)

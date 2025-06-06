@@ -64,6 +64,9 @@ input {
         // accel-speed 0.2
         // accel-profile "flat"
     }
+    touch{
+      map-to-output "HDMI-A-1"
+    }
 
     tablet {
         // Set the name of the output (see below) which the tablet will map to.
@@ -113,12 +116,13 @@ scale 1.25
 }
 
 layout {
+  background-color "transparent"
      tab-indicator {
         corner-radius 8
         gaps-between-tabs 4
         width 5
         gap 4
-        inactive-color "#888888aa"
+        inactive-color "#888888"
         length total-proportion=0.4
         position "left"
         place-within-column
@@ -175,7 +179,7 @@ layout {
     // default-column-width {}
 
     // Set gaps around windows in logical pixels.
-    gaps 2
+    gaps 5
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
     // You can think of them as a kind of outer gaps. They are set in logical pixels.
@@ -201,7 +205,7 @@ layout {
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
- spawn-at-startup "footclient" "starttmux"
+ spawn-at-startup "kitty" "starttmux"
 spawn-at-startup "cosmic-ext-alternative-startup"
 
  spawn-at-startup "xwayland-satellite" ":0"
@@ -248,7 +252,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return { spawn "footclient" "starttmux"; }
+    Mod+Escape repeat=false {toggle-overview;}
+    Mod+Return { spawn "kitty" "starttmux"; }
     Mod+W { spawn "rofitoggle" "-show" "drun" "-show-icons"; }
     Mod+Shift+W { spawn "rofimoji" "--use-icons" "--selector-args" "-theme gruvbox-material-emoji -l 8"; }
     Mod+grave { spawn "rofitoggle" "-show" "window" "-theme" "gruvbox-material-alttab"; }
@@ -303,8 +308,8 @@ binds {
     Mod+Shift+E     { move-window-down-or-to-workspace-down; }
     Mod+Shift+O     { move-window-up-or-to-workspace-up; }
     Mod+Shift+I     { move-column-right; }
-    Mod+G           { swap-window-left;}
-    Mod+Y           { swap-window-right;}
+    Mod+F           { swap-window-left;}
+    Mod+semicolon           { swap-window-right;}
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
@@ -472,6 +477,13 @@ window-rule {
 
     open-floating true
     default-floating-position x=32 y=32 relative-to="bottom-left"
+}
+// Make the wallpaper stationary, rather than moving with workspaces.
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
 }
 prefer-no-csd
 // Settings for debugging. Not meant for normal use.

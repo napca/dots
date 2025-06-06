@@ -5,7 +5,7 @@ input "type:touchpad" {
   dwtp enabled
   dwt enabled
   accel_profile adaptive
-  pointer_accel 0.2
+  pointer_accel 0.4
 }
 input "1133:16468:Logitech_Wireless_Mouse" {
   accel_profile "flat"
@@ -17,7 +17,6 @@ input "type:keyboard" {
 }
 input "2:10:TPPS/2_Elan_TrackPoint" {
   accel_profile adaptive
-  dwt enabled
   pointer_accel 0.08
   scroll_factor 0.8
 }
@@ -39,10 +38,12 @@ set {
 }
 ##set variables for color scheme
 set {
+  $transparent  #00000000
   $red		    #f7768e
   $green		  #9ece6a
   $yellow		  #e0af68
-  $blue		    #7aa2f7
+  $darkblue   #5A76B2
+  $blue		    #6798FF
   $white		  #c0caf5
   $bg         #1a1b26
   $bglighter	#414868
@@ -79,14 +80,19 @@ output eDP-1 scale 1.3
 
 seat seat0 xcursor_theme 'elementary' 24
 bindgesture {
-  swipe:4:left workspace prev
-  swipe:4:right workspace next
-  swipe:4:down exec pkill rofi ||  rofi -show drun -show-icons
+  swipe:3:up workspace prev
+  swipe:3:down workspace next
+  # swipe:3:right exec pkill rofi ||  rofi -show drun -show-icons
+  # swipe:3:left exec pkill rofi ||  rofi -show window -theme gruvbox-material-alttab -hover-select -me-select-entry '' -me-accept-entry MousePrimary -ml-row-up ScrollUp -kb-accept-entry 'space,Return' -kb-row-down Alt-Tab
 }
 
 bindswitch --locked lid:on exec systemctl suspend
 
 bindsym --to-code {
+  $mod+grave exec pkill rofi ||  rofi -show window -theme gruvbox-material-alttab -hover-select -me-select-entry '' -me-accept-entry MousePrimary -ml-row-up ScrollUp -kb-accept-entry 'space,Return' -kb-row-down Alt-Tab
+  $alt+tab focus next
+  $alt+shift+tab focus prev
+
   # Sink volume -optionally with --device
   --locked XF86AudioLowerVolume exec $voldown
   --locked XF86AudioRaiseVolume exec $volup
@@ -113,7 +119,6 @@ bindsym --to-code {
   $mod+Control+r input type:keyboard xkb_switch_layout 0
   $mod+Control+t input type:keyboard xkb_switch_layout 1
   $mod+Control+w input type:keyboard xkb_switch_layout 2
-  --release $alt+Space exec notify-send $(swaymsg -t get_inputs | jq '.[0].xkb_active_layout_name'|tr -d '"') -t 650 -e
   $mod+shift+x exec swaymsg "output * dpms off"
   $mod+x exec swaymsg "output * dpms on"
   $mod+Return exec $term
@@ -125,7 +130,8 @@ bindsym --to-code {
 #  $mod+r exec j4-dmenu-desktop --dmenu="bemenu -i --nb '#2b3339' --hb '#2b3339' --sb '#4b565c' --fbb '#2b3339' --scb '#2b3339' --tb '#2b3339' --fb '#2b3339' --ab '#2b3339' --nb '#2b3339' --hf '#dbbc7f' --tf '#e67e80' -H 32" #run app launcher
   $mod+w exec pkill rofi || rofi -show drun -show-icons
   $mod+r exec pkill rofi || rofi -show emoji
-  $mod+l exec "music"
+  $mod+m mark --toggle --replace 1 
+  $mod+s swap container with mark 1
 #  $mod+r exec ulauncher
   $mod+Shift+m reload
 ##change focus
@@ -138,8 +144,8 @@ bindsym --to-code {
   $mod+Up focus up
   $mod+Right focus right
 ##change focus with alt-tab
-  $alt+tab focus next
-  $alt+shift+tab focus prev
+  # $alt+tab focus next
+  # $alt+shift+tab focus prev
 ##move windows around
   $mod+Shift+$left move left
   $mod+Shift+$down move down
@@ -172,24 +178,24 @@ bindsym --to-code {
   $mod+Control+k move workspace to output left
 ##switch between sway's layouts
   $mod+f layout tabbed
-  $mod+u splitv
-  $mod+p layout toggle split
-  $mod+semicolon splith
+  $mod+u split v
+  $mod+p split h
+  $mod+semicolon split t
 
   $mod+t fullscreen
   $mod+shift+t fullscreen global
 
-  $mod+Shift+space floating toggle
-  $mod+space focus mode_toggle
+  $mod+Shift+c floating toggle
+  $mod+c focus mode_toggle
 
   $mod+a focus parent
 
   #basically a window that you can hide and show on your focused workspace
   $mod+Shift+9 move scratchpad
-  $mod+Shift+c move scratchpad
+  # $mod+Shift+c move scratchpad
   #show scratchpad
   $mod+9 scratchpad show
-  $mod+c scratchpad show
+  # $mod+c scratchpad show
   #playerctl is for managing your media player
 
   --release $mod+shift+backspace exec playerctl play-pause
@@ -236,14 +242,12 @@ bindsym --to-code {
 
   gaps inner  5 
   gaps outer  2 
-  default_border pixel 1 #border width
-#removes border if you have only one window
-  smart_borders on
-#	colorclass		          border	  background    text  	indicator	  child_border
-  client.focused 	  	    $bg     	$bg     	    $red   	$blue		    $red
-  client.focused_inactive	$bg		    $bg		        $white	$bg		      $bg
-  client.unfocused  	    $bg 		  $bg	          $white	$red		    $bg
-  client.urgent   		    $yellow		$yellow		    $bg	    $yellow	  	$yellow
+  default_border pixel 2
+#	colorclass		          border	        background    text  	indicator	  child_border
+  client.focused 	  	    $transparent    $bglighter    $white  $blue		$darkblue
+  client.focused_inactive	$transparent		$bg		        $white	$bg		      $bg
+  client.unfocused  	    $transparent 		$bg	          $white	$blue		$bg
+  client.urgent   		    $yellow		      $yellow		    $bg	    $yellow	  	$yellow
 #assign windows to open in said workspace
   for_window {
 #        [title="Picture-in-Picture"] border none
